@@ -2,8 +2,8 @@
 
 ## Authors
 
-Finn Rabe <finn dot rabe at bli dot uzh dot ch>
-Philipp Homan <philipp dot homan at bli dot uzh dot ch>
+- Finn Rabe <finn dot rabe at bli dot uzh dot ch>
+- Philipp Homan <philipp dot homan at bli dot uzh dot ch>
 
 ## Getting Started
 This repository contains all the data and analysis code to reproduce
