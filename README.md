@@ -4,6 +4,7 @@
 - Finn Rabe
 Email: [finn.rabe@bli.uzh.ch](mailto:finn.rabe@bli.uzh.ch)
 - Philipp Homan
+Email: [philipp.homan@bli.uzh.ch](mailto:philipp.homan@bli.uzh.ch)
 
 ## Overview
 This repository contains the code, data, and supplementary materials for the study titled "Genetic Susceptibility to Schizophrenia Through Neuroinflammatory Pathways is Associated with Retinal Thickness: Findings from the UK Biobank". The study investigates the relationship between genetic predisposition to schizophrenia, measured via polygenic risk scores (PRS), and retinal thickness in healthy individuals. The findings suggest that genetic susceptibility to schizophrenia, particularly through neuroinflammatory pathways, is associated with retinal thinning, providing insights into potential early biomarkers for schizophrenia.
@@ -13,8 +14,7 @@ This repository contains the code, data, and supplementary materials for the stu
 retinflam_load.R: Script to load and preprocess data.
 retinflam_do.R: Main analysis script performing statistical computations, including robust regression and mediation analyses.
 retinflam_do.py: Python script for generating filtered datasets and figures.
-2. output/figures
-figures/: Generated figures and visualizations.
+2. output/figures/: Generated figures and visualizations.
 Heatmaps of retinal subfield associations.
 Mediation analysis tables in PDF format.
 3. pub/
