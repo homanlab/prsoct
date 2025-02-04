@@ -1,31 +1,37 @@
-# Retina PRS OCT Project
+# Genetic Susceptibility to Schizophrenia Through Neuroinflammatory Pathways is Associated with Retinal Thickness: Findings from the UK Biobank
 
-## Authors
+## Author
+Finn Rabe <finn dot rabe at bli dot uzh dot ch>
+Philipp Homan<philipp dot homan at bli dot uzh dot ch>
 
-- Finn Rabe <finn dot rabe at bli dot uzh dot ch>
-- Philipp Homan <philipp dot homan at bli dot uzh dot ch>
+## Overview
+This repository contains the code, data, and supplementary materials for the study titled "Genetic Susceptibility to Schizophrenia Through Neuroinflammatory Pathways is Associated with Retinal Thickness: Findings from the UK Biobank". The study investigates the relationship between genetic predisposition to schizophrenia, measured via polygenic risk scores (PRS), and retinal thickness in healthy individuals. The findings suggest that genetic susceptibility to schizophrenia, particularly through neuroinflammatory pathways, is associated with retinal thinning, providing insights into potential early biomarkers for schizophrenia.
 
-## Getting Started
-This repository contains all the data and analysis code to reproduce
-the manuscript Retina PRS OCT Project. These instructions describe how
-to obtain a copy of the project up and running on your local machine
-for reproducing the analysis described in the manuscript. The
-repository contains a Makefile which reflects the dependencies of the
-analysis; analysis, figures and manuscript can be produced by simply
-typing 'make' from the Unix command line.
+## Repository Structure
+1. src/
+retinflam_load.R: Script to load and preprocess data.
+retinflam_do.R: Main analysis script performing statistical computations, including robust regression and mediation analyses.
+retinflam_do.py: Python script for generating filtered datasets and figures.
+2. output/figures
+figures/: Generated figures and visualizations.
+Heatmaps of retinal subfield associations.
+Mediation analysis tables in PDF format.
+3. pub/
+References (references.bib): Bibliography file for citations in the manuscript.
+4. Manuscript Files
+retinflam_ms.Rmd: R Markdown file for generating the manuscript with embedded code and results.
 
+## Data Sources
+Data used in this study were obtained from the UK Biobank (application ID: 102266).
+Genetic data were processed following QC protocols to ensure high-quality SNPs and imputed genotypes.
+Retinal imaging data were acquired using optical coherence tomography (OCT).
 
 ### Prerequisites
-All analyses were conducted with the R software R version 3.4.4
-(2018-03-15). Mixed models were estimated using the lme4 library, Python
-2.7.14 and pysurfer (0.8.0) were also used. The full session info under
-R can be found at the end of this file
-
+- R (version 4.0.5 or later)
+- Python (version 3.9 or later)
 
 ## Installing
-Clone the repository or download the zip file.
+Clone the repository: **git clone https://github.com/homanlab/prsoct.git**
 
-## Built With
-
-
-## Session info
+## Producing all analyses and manuscript
+**Rscript -e "rmarkdown::render('retinflam_ms.Rmd')"**

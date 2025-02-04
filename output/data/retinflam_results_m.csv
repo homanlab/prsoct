@@ -1,0 +1,2 @@
+,Unnamed: 0,n_total,n_qen_qc,n_hypertension,n_diabetestwo,n_eyedis,n_hyperopic,n_myopic,n_my_hyperopic,n_ethn,n_octqc,n_antipsy,n_nondiag,n_nondiag_nan,n_diag,n_diag_nan,mean_age,mean_bmi,mean_townsend_index,male,female,mcar_pval,tstat_sex,tstat_sex_p,curr_smoker,prev_smoker,non_smoker,curr_alcohol_drinker,prev_alcohol_drinker,non_alcohol_drinker
+0,0,64283,2707,19440,5204,2032,0,4406,2203,8072,13778,128,35249,310,114,2,56.87 (7.99),27.23 (4.67),-1.36 (2.81),15869,19070,3.75195684377827e-05,-24.32,p < 0.0001****,3374,12644,18921,32810,1108,1021

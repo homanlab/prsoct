@@ -1,0 +1,1235 @@
+---
+title             : "**Genetic susceptibility to schizophrenia \
+                     through neuroinflammatory pathways is associated \
+                     with retinal thickness:\ Findings from the UK-Biobank**"
+shorttitle        : "Neuroinflammatory pathway and retinal changes" 
+
+author: 
+  - name          : "Finn Rabe, PhD†"
+    affiliation   : "1" 
+  - name          : "Lukasz Smigielski, PhD†"
+    affiliation   : "2" 
+  - name          : "Foivos Georgiadis, MD"
+    affiliation   : "1"
+  - name          : "Nils Kallen, MD"
+    affiliation   : "1"
+  - name          : "Wolfgang Omlor, MD, PhD"
+    affiliation   : "1"
+  - name          : "Victoria Edkins, PhD"
+    affiliation   : "1"
+  - name          : "Matthias Kirschner, MD"
+    affiliation   : "1"
+  - name          : "Flurin Cathomas, MD"
+    affiliation   : "1"
+  - name          : "Edna Grünblatt, PhD"
+    affiliation   : "2,3,4"
+  - name          : "Steven Silverstein, PhD"
+    affiliation   : "5,6,7,8"
+  - name          : "Brittany Blose, MS"
+    affiliation   : "5,6,7,8"
+  - name          : "Daniel Barthelmes, MD, PhD"
+    affiliation   : "9"
+  - name          : "Karen Schaal, MD"
+    affiliation   : "10" 
+  - name          : "Jose Rubio, MD, PhD"
+    affiliation   : "11,12,13" 
+  - name          : "Todd Lencz, PhD"
+    affiliation   : "11,12,13" 
+  - name          : "Philipp Homan, MD, PhD"
+    affiliation   : "1,3*"
+    corresponding : yes
+    address       : "Department of Adult Psychiatry and Psychotherapy, \
+                     University of Zurich, \
+                     Lenggstrasse 31, \
+                     8032 Zurich, Switzerland" 
+    email         : "philipp.homan@bli.uzh.ch"
+
+affiliation:
+  - id            : "1"
+    institution   : "Department of Adult Psychiatry and Psychotherapy, \
+                     University of Zurich, \
+                     Zurich, Switzerland."
+  - id            : "2"
+    institution   : "Department of Child and Adolescent Psychiatry and Psychotherapy, \
+                     University Hospital of Psychiatry Zurich, \
+                     University of Zurich, Zurich, Switzerland."
+  - id            : "3"
+    institution   : "Neuroscience Center Zurich, \
+                     University of Zurich and ETH Zurich, Zurich, Switzerland."
+  - id            : "4"
+    institution   : "Zurich Center for Integrative Human Physiology, \
+                     University of Zurich, Zurich, Switzerland."
+  - id            : "5"
+    institution   : "Department of Psychiatry, \
+                     University of Rochester Medical Center, Rochester, New York, USA."
+  - id            : "6"
+    institution   : "Department of Ophthalmology, \
+                     University of Rochester Medical Center, Rochester, New York, USA."
+  - id            : "7"
+    institution   : "Department of Neuroscience, \
+                     University of Rochester Medical Center, Rochester, New York, USA."
+  - id            : "8"
+    institution   : "Center for Visual Science, \
+                     University of Rochester, Rochester, New York, USA."
+  - id            : "9"
+    institution   : "Department of Ophthalmology, \
+                     University Hospital Zurich, \
+                     University of Zurich, Zurich, Switzerland."
+  - id            : "10"
+    institution   : "Department of Ophthalmology,  \
+                     Inselspital University Hospital Bern, \
+                     Bern, Switzerland."
+  - id            : "11"
+    institution   : "Institute of Behavioral Science, \
+                     Feinstein Institutes for Medical Research, Manhasset, NY, USA."
+  - id            : "12" 
+    institution   : "Division of Psychiatry Research, \
+                     Zucker Hillside Hospital, Northwell Health, \
+                     New York, NY, USA."
+  - id            : "13"
+    institution   : "Department of Psychiatry, \
+                     Zucker School of Medicine at Hofstra/Northwell, \
+                     Hempstead, NY, USA."
+                     
+abstract: |
+  Schizophrenia is associated with structural and functional changes in the central 
+  nervous system, including the most distal part of it: the retina. However, the 
+  question of whether retinal atrophy is present before individuals develop 
+  schizophrenia or is a secondary consequence of the disorder, caused for example, 
+  by pathophysiological processes or other confounders (e.g. antipsychotics) 
+  remains unanswered. We aimed to address this question by examining the association 
+  between polygenic risk scores for schizophrenia and retinal morphologies in 
+  individuals without a schizophrenia diagnosis. We used population data for white 
+  British and Irish individuals from the UK Biobank and estimated a polygenic risk 
+  score for schizophrenia based on the genome wide association data (PGC release 2022). 
+  We hypothesized that greater genetic susceptibility to schizophrenia is associated 
+  with thinner retinal tissue, specifically within the macula. To gain additional 
+  mechanistic insights, we conducted pathway-specific polygenic risk score associations 
+  analyses for gene pathways related to schizophrenia. Analyses were conducted for 
+  individual retinal layers as this provided the opportunity to distinguish between 
+  neurodevelopmental and neurodegenerative processes.`r base::source("retinflam_do.R")` `r results <- read.csv("../output/data/retinflam_results_m.csv")` 
+  Of `r results$n_total[1]` individuals recruited, `r n_model_left`
+  participants with available matching imaging-genetic data were 
+  included in the analysis, of whom `r results$female[1]` 
+  (`r results$female[1]/(results$male[1]+results$female[1])*100`%) were
+  female and 
+  `r results$male[1]` (`r results$male[1]/(results$male[1]+results$female[1])*100`%) were male. 
+  According to our robust regression results, higher polygenic risk scores for 
+  schizophrenia were associated with thinner overall macular thickness while 
+  controlling for confounding factors (b = `r mean_macula_b`, `r format_p(mean_macula_p, stars = FALSE)`).
+  Similarly, we found that greater polygenic risk scores for schizophrenia
+  specific to neuroinflammation gene sets were associated
+  with thinner ganglion cell-inner plexiform layers (b = `r subset(df_pathcomp_reord, Pathway == "NEUROINFLAM_PRS" & Phenotype == "GCIPL")$Estimate`, 
+  self-contained `r format_p(subset(df_pathcomp_reord, Pathway == "NEUROINFLAM_PRS" & Phenotype == "GCIPL")$selfcontained.p, stars = FALSE)`; reflecting the level of association, 
+  competitive p = `r round(subset(df_pathcomp_reord, Pathway == "NEUROINFLAM_PRS" & Phenotype == "GCIPL")$competitive.p, digits = 4)`;
+  reflecting the level of enrichment).
+  These results provide new evidence for genetic factors that could predispose individuals 
+  to heightened neuroinflammatory responses. Over time these responses could contribute to 
+  progressive neurodegeneration, manifesting in part as retinal thinning. The results also 
+  suggest the involvement of inflammatory biomarkers in structural changes in the retina.
+
+bibliography  : ["../pub/references.bib"]
+csl           : nature.csl
+fontsize      : 9pt
+draft         : no
+figsintext    : yes
+floatsintext  : yes
+fig_caption	  : true
+class         : "jou/doc"
+output        : papaja::apa6_pdf
+latex_engine  : xelatex
+classoptions   : twocolumn
+citation_package: natbib
+bibliostyle   : nature
+header-includes:
+  - \pagenumbering{gobble}
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyhf{}
+  - \renewcommand{\headrulewidth}{0pt}
+  - \fancypagestyle{plain}{\pagestyle{fancy}}
+  - \chead{\shorttitle}
+  - \usepackage{helvet}
+  - \renewcommand{\familydefault}{\sfdefault}
+  - \usepackage{tipa}
+  - \usepackage{graphicx}
+  - \usepackage{tabu}
+  - \usepackage{float}
+  - \usepackage[format=plain,labelfont=bf]{caption}
+  - \captionsetup[table]{font=footnotesize,labelfont=bf,position=below}
+  - \captionsetup[figure]{font=footnotesize,labelfont=bf}
+  - \usepackage{multicol}
+  - \newcommand{\beginsupplement}{\setcounter{table}{0} 
+      \renewcommand{\thetable}{S\arabic{table}} 
+      \setcounter{figure}{0} 
+      \renewcommand{\thefigure}{S\arabic{figure}}}
+  - \setlength{\parskip}{0pt}
+  - \usepackage{dcolumn}
+  - \usepackage{array}
+  - \usepackage{colortbl}
+---
+
+```{r global_options, include=FALSE}
+# set global options for output images
+# tidy.opts = margin cutoff point and wraps text to the next line
+knitr::opts_chunk$set(
+  echo = FALSE, warning = FALSE, message = FALSE,
+  tidy.opts = list(width.cutoff = 72)
+)
+
+# set global options for knitr
+knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
+options(tinytex.verbose = TRUE)
+```
+
+```{r load_packages, include=FALSE, warning=FALSE, message=FALSE}
+## two analyses steps: ov = includes data from GCP-IPL, RNFL and macular,
+## subf = includes data only from macular subfields
+
+# load diagramme variables
+# results <- read.csv("../data/retinflam_results.csv")
+
+# for knitting latex to pdf in windows
+# Sys.setenv(JAVA_HOME = "C:\\Programme\\Java\\jre1.8.0_171")
+```
+
+# Introduction
+Individuals with schizophrenia suffer from poor physical health
+and a reduced life expectancy. Poor physical health is reflected
+even in the most distal part of the central nervous system: the human
+retina. The retina is a direct extension of the brain that provides a
+non-invasive and real-time means of characterizing the neurovascular
+structure and function of the central nervous system.[@London2012]
+Recent studies using optical coherence tomography found retinal thinning in
+individuals with schizophrenia.[@Lee2013;@Asanad2021;@GonzalezDiaz2022;@Komatsu2022;@Friedel2022;@Boudriot2022;@Wagner2023;@Shew2024;@Boudriot2024;@Kallen2024]
+These studies have shown inner retinal atrophy, thinner 
+peripapillary retinal nerve fiber layers and macular ganglion cell and
+inner plexiform layers, as well as an enlarged cup-disc ratio. 
+
+Findings such as these point to a neurobiological substrate of schizophrenia, 
+detectable in this distal part of the central nervous system. However,
+in all of these studies the disorder was already present and it was
+thus unclear whether these differences in retinal thickness may have 
+also been detectable at early stages, before the onset of symptoms. 
+In addition, the presence of potentially confounding factors 
+such as the effects of antipsychotic medication, smoking, 
+lifestyle factors, and disease-related changes can
+impact retinal health. Such confounders can in turn obscure
+the interpretation of findings, making it difficult to determine
+whether observed differences in retinal thickness are directly related
+to the pathophysiology of schizophrenia or are secondary to these
+confounding factors.
+
+Intriguingly, thinner retinas have been observed not only in patients
+but also in unaffected first-degree relatives, suggesting a link to
+genetic susceptibility to schizophrenia.[@Asanad2021] Polygenic risk
+scores are an alternative to conventional heritability studies. They
+allow researchers to investigate the genetic underpinnings of
+retinal thickness differences in the context of schizophrenia risk, thus
+providing a potential understanding of the genetic contributions to
+retinal atrophy.[@Henriksen2017] Polygenic riks scores aggregate 
+the impact of numerous genetic variants throughout the genome 
+and account for a considerable portion of the variance in disease risk.
+[@Trubetskoy2022;@Choi2020] The identification of shared genetic
+influences between retinal structures and schizophrenia
+[@Zhao2023;@LazzeriniOspri2024] further supports the hypothesis that
+retinal atrophy observed in schizophrenia could reflect underlying
+genetic susceptibilities. This convergence from optical coherence 
+tomography studies and genetic research may help in the exploration 
+of the ways in which genetic predispositions contribute to the 
+neurodevelopmental and neurodegenerative anomalies in 
+schizophrenia [@Schor2021], including retinal alterations.
+
+The present study asked whether thinner retinas are already
+detectable in healthy individuals with a higher genetic risk for
+schizophrenia. We focused on the macula, the area with the highest
+density of neurons in the retina (Fig. \@ref(fig:fig1)).
+Furthermore, we explored gene set-specific polygenic
+risk scores for schizophrenia: biological pathways that are related to
+neurotransmitter regulation, inflammation and microvasculature, all of
+which may be altered in individuals with schizophrenia.
+[@Kirkpatrick2013;@Valle2022;@Silverstein2021;@Luvsannyam2022] 
+Pathway-specific analyses focused on the cumulative genetic risk
+within specific biological pathways, which may offer insights into the
+heterogeneity of the disease and its various manifestations.
+[@Toulopoulou2018] These analyses provide a more nuanced
+understanding of the genetic architecture of the disorder by exploring
+whether certain genetic pathways implicated in schizophrenia may also
+contribute to retinal thinning. This could help in elucidating the biological
+mechanisms underlying both the psychiatric and retinal manifestations
+of schizophrenia. To provide a more comprehensive understanding of 
+how genetic risk affects different retinal structures, we not only focused 
+on the inner retina (including the retinal nerve fiber layer, ganglion cell-inner 
+plexiform layer and inner nuclear layer), but also the outer retina 
+(inner nuclear layer - retinal pigment epithelium). If a 
+certain pathway-related genetic risk for schizophrenia is associated
+with both higher genetic risk for schizophrenia and inner retinal
+thickness, this could indicate a shared biological basis that
+contributes to neurodegnerative processes. In summary, we hypothesized that higher
+polygenic risk for schizophrenia would be associated with a thinner 
+macular tissue, and that this association would be reflected in pathways
+relevant for schizophrenia.
+
+```{r fig1capt}
+fig1capt <- "a. Anatomy of the eye and retina, displayed as
+cross section of the eye, and macular section of the retina.
+Optical coherence tomography measurements divide the
+macula in 9 subfields as indicated by white crosshairs.
+Macular thickness is measured in microns (micrometer).
+The structure of different layers of the inner and outer
+retina is displayed on the right.
+Association between polygenic risk scores (z-scored) for
+schizophrenia and (b) overall mean macular thickness (in micrometers)
+and (c) outer retinal thickness, averaged across both eyes.
+Solid lines represent the regression estimates,
+while complementary shaded areas correspond
+to 95 percent confidence intervals."
+```
+```{r fig1, include = TRUE, fig.env = "figure*", fig.cap = fig1capt, out.width="100%"}
+p1a <- readPNG(fig1)
+p1ap <- rasterGrob(p1a, interpolate = TRUE)
+p1b <- readPNG(fig2)
+p1bp <- rasterGrob(p1b, interpolate = TRUE)
+p1c <- readPNG(fig2b)
+p1cnew <- rasterGrob(p1c, interpolate = TRUE)
+p1bcp <- cowplot::plot_grid(p1bp, p1cnew,
+  nrow = 1, labels = c("b", "c"),
+  label_size = 15
+)
+fig1new <- cowplot::plot_grid(p1ap, p1bcp,
+  nrow = 2, labels = c("a"),
+  label_size = 15
+)
+fig1newp <- ggsave(filename = "../output/figures/retinflam_fig1.png", fig1new)
+knitr::include_graphics(fig1newp, rel_path = TRUE)
+```
+
+# Methods
+## Base data: schizophrenia genome-wide association study (GWAS) 2022
+The summary statistics base dataset was derived from the latest 
+peer-reviewed genome-wide association study for schizophrenia
+.[@Trubetskoy2022] We used a file generated with the exclusion 
+of samples from the UK Biobank to assure that the
+base and discovery files are independent. Following quality control (QC)
+recommendations [@Choi2020], we assured the same genome build with the
+discovery data (GRCh37/hg19), retained single-nucleotide polymorphisms 
+(SNPs) with minor allele frequency > 1% and INFO score > 0.8, checked 
+for duplicate SNPs and removed ambiguous SNPs. The final
+base file included 5899135 SNPs.
+
+## Discovery data: UK Biobank genetic dataset
+This study used data from the UK Biobank (application
+102266). A full description of genotyping and imputation procedures of
+the UK Biobank data (https://www.ukbiobank.ac.uk/) is provided in the
+release documentation elsewhere. [@Bycroft2018] Briefly, 487409 blood
+samples were assayed using two customized tagSNP arrays (the Applied
+Biosystems UK BiLEVE Axiom Array and the Applied Biosystems UK Biobank
+Axiom Array [Affymetrix, Santa Clara, CA, USA]) with 95% shared
+markers, imputed to the UK10K and 1000 Genome Project Phase 3
+reference panels, with SHAPEIT3 [@OConnell2016] used for phasing, and
+IMPUTE2 [@Howie2009] used for imputation. Further data handling and QC
+steps were carried out according to a published processing pipeline.
+[@Collister2022] To address population stratification, we retrieved
+ten genetic principal components from the UK Biobank. Specifically,
+after SNP extraction and alignment, conversion from bgen to PLINK
+format, removal of ambiguous SNPs (A/T, C/G; effects with allele frequencies
+between 0.4 and 0.6), data underwent a SNP-level QC (MAF < 0.005 and
+INFO score < 0.4) and sample-level QC (retaining individuals with
+missing rate in autosomes =< 0.02, which were not outliers for
+genotype missingness or heterozygosity, not being genetically related
+to third-degree relatives, not being sex-discordant and of White
+British or Irish ethnicity according to genetic grouping). We also
+excluded all optical coherence tomography images with the worst 20% image quality and 
+individuals with eye disorders and diseases known to 
+affect the eye, including diabetes related eye diseases, glaucoma, macular
+degeneration, injury or trauma resulting in loss of vision. 
+We also excluded individuals with highly myopic and hyperopic eyes. Not only 
+did we exclude all individuals that were “highly myopic” according 
+to UK Biobank measurements and criteria [@Guggenheim2015], 
+but we excluded extreme myopic (SE >= -6 diopters) 
+and hyperopic (SE <= 3 diopters) eyes [@EDPRG2004], as measured by a
+median spherical equivalent (SE) value for each eye.
+Finally, individuals with a ICD-10 diagnosis (F20 to F29), those who
+were medicated with antipsychotics, and those who had missing data for the
+variables of interest or covariates were excluded from any further 
+analysis. A Little's Missing Completely at Random (MCAR) test indicated 
+that data were not MCAR (`r format_p(results$mcar_pval,stars = FALSE)`). 
+Therefore, we used multiple imputation using predictive mean matching (PMM) 
+to handle missing values and compared regression results between imputed and complete dataset.
+In total, n = `r n_model_left` individuals with matched imaging-genetic 
+data were included in the final analysis (see Fig. \@ref(fig:fig2) for details
+of participants' inclusion and exclusion).
+
+```{r fig2capt}
+fig1acapt <- "Diagram of inclusion and exclusion of
+participants in population. QC, Quality control;
+ICD, International Classification of Diseases;
+ICD-10, F20-29 categorization includes
+individuals with diagnosed schizophrenia,
+schizotypal and delusional disorders."
+```
+```{r fig2, include = TRUE, fig.cap = fig1acapt, out.width="100%"}
+knitr::include_graphics(diag1, rel_path = TRUE)
+```
+
+## Polygenic risk scores calculations
+In the main analysis, polygenic risk scores for schizophrenia were 
+computed for each individual as a sum of risk alleles
+weighted by their estimated effect sizes [@Choi2019] using the --score
+function in PLINK 2.0.[@Chang2015] In addition, we generated five 
+polygenic risk scores for schizophrenia for each individual, 
+employing SNPs selected based on their significance in association 
+with the phenotype in the discovery GWAS at nominal p-value 
+thresholds of 0.01 or less, 0.05, 0.1, 0.5, and 1.00.
+
+## Derivation of pathway-based polygenic risk scores and signaling-pathway-specific analyses
+We prioritized pathways known to be associated with the disease 
+or phenotype of interest based on previous studies. 
+[@Kirkpatrick2013;@Valle2022;@Silverstein2021;@Luvsannyam2022] 
+Pathway polygenic risk scores were calculated by including only
+those SNPs that were relevant to the specific pathway under investigation 
+and are also associated with schizophrenia. 
+Pathway polygenic risk scores for schizophrenia were computed
+using PRSet [@Choi2020] in PRSice-2 [@Choi2019] for nine candidate
+gene sets selected from the Molecular Signatures Database version
+v2023.2 (https://www.gsea-msigdb.org/): acute inflammatory response
+(systematic name: M6557), TGF-beta signaling (M18933), chronic
+inflammatory response (M15140), positive regulation of dopamine
+receptor signaling pathway (M24111), Wnt signaling pathway involved in
+midbrain dopaminergic neuron differentiation (M25305), 
+Wnt/beta-catenin pathways (M17761),
+neuroinflammatory response (M24927), abnormal retinal vascular
+morphology (M43559) and premature coronary artery atherosclerosis (M36658). 
+For more details, 
+see *Gene pathways from the Molecular Signatures Database (MSigDB) version 7.4 utilized in pathway-based analysis*
+in the Supplementary Information. A PRSet p-value threshold was set 
+at 1 due to the limited number of SNPs in gene-set polygenic risk scores, 
+potentially not reflecting the entirety of gene sets accurately. 
+Both the self-contained p-value and the competitive
+p-value were obtained. Self-contained methods tested each gene 
+set independently to determine if the genes within the set were 
+associated with the phenotype of interest. This approach does 
+not compare the gene set to the rest of the genome. 
+The level of association reflected by self-contained methods 
+is the degree to which the genes within the pathway are 
+collectively associated with the phenotype, without 
+considering genes outside the pathway. [@Choi2020] 
+Competitive methods, on the other hand, compared the level of association between 
+genes within a pathway and the rest of the genes in the genome. 
+This approach tested whether the genes in the pathway are more 
+associated with the phenotype than what would be expected by 
+chance, given the level of association observed in genes outside 
+the pathway. Thus, this competitive method reflected signal enrichment 
+by determining if the pathway stood out against the genomic background. [@Choi2020]
+Both self-contained and competitive p-values were calculated 
+within PRSet through 10,000 permutations to generate null 
+distribution curves for p-values. The regression models 
+consisted of thickness measures for retinal nerve fiber layer-,
+ganglion cell-inner plexiform layer-, inner nuclear layer-, 
+outer retinal thickness  and all covariates. Human GRCh37 genome 
+version was used as the background file.
+
+## Optical coherence tomography protocol and analysis
+Optical coherence tomography images were acquired between the years
+2009 and 2010 using a spectral domain optical coherence tomography device, with a
+raster scan protocol of 6×6mm area centered on the fovea, consisting
+of 128 B-scans each with 512 A-scans, completed in 3.7 seconds. 
+Automated analysis of retinal thickness was performed using custom software
+developed by Topcon Advanced Biomedical Imaging Laboratory, which used 
+dual-scale gradient information for rapid segmentation of nine intraretinal
+boundaries, processing the images in approximately 120 seconds each. A
+comprehensive account of the standardized protocol employed for optical coherence tomography
+acquisition and the subsequent automated analysis of retinal thickness
+has previously been described.[@Keane2016] In the current study, we
+focused on the macula as it contains mutiple layers that, based on
+prior investigations, show thinning in individuals diagnosed with
+schizophrenia. [@Kazakos2019;@Wagner2023;@Komatsu2023]
+
+## Assessments of optical coherence tomography data distribution
+The normality of the distribution for each retinal phenotype was
+assessed by visual inspection. However, the tailedness of the distributions
+for each retinal phenotype data appeared to be skewed
+by outliers (see diagonal in Fig. \@ref(fig:figs2)).
+We also computed the pearson correlation coefficients between 
+retinal phenotypes (Fig. \@ref(fig:figs2)).
+
+## Robust linear regression analysis for overall macular thickness and polygenic risk scores for schizophrenia
+To account for potential outliers and heteroscedasticity observed in
+the retinal phenotype data, robust regression analysis was employed in
+order to examine the association between the polygenic risk scores for
+schizophrenia and macular phenotypes.
+
+Robust linear regression employs M-estimation for robust linear
+modeling. M-estimators are a broad class of estimators in statistics
+that generalize maximum likelihood estimators, which are sensitive to
+outliers and violations of normality assumptions. The estimator used a
+Huber weight-function to downweight the influence of outliers and
+heavy-tailed distributions on the estimation of the model parameters.
+[@Huber1981] We used the MASS::rlm package in R to conduct this 
+robust analysis in which overall macular thickness was the dependent 
+variable and polygenic risk scores for schizophrenia were the independent variable.
+
+In this study when reporting *b*, we always refer 
+to the standardized regression coefficient, 
+which represents the estimated change in the dependent variable 
+for a one-unit change in the independent variable. 
+
+## Confounding factors
+We included a comprehensive set of covariates in a multiple linear
+regression analysis for studying the association between polygenic
+risk scores for schizophrenia and macular thickness in isolation.
+These were age and quadratic age terms, genetic sex, hypertension diagnosed 
+as ICD-10 (I10-15), diabetes mellitus diagnosed as ICD-10 (E10-14),
+alcohol drinker status, Body Mass Index (BMI), smoking status, 
+Townsend Deprivation Index, optical coherence tomography image quality,
+the type of genotyping array used, and the first ten genetic principal components. 
+The following rationale was applied for the inclusion of covariates: 
+Age is a fundamental factor in the development of diseases,
+including macular changes and schizophrenia.[@Wsowska2022] Various 
+retinal structures are also known to degenerate with age.[@Wei2017;@Georgiadis2024] 
+The inclusion of both linear and quadratic terms for age allows the model to
+capture not just a linear increase or decrease in risk or severity
+with age, but also any acceleration or deceleration in this trend.
+Furthermore, biological sex can influence the risk of developing various diseases,
+their progression, and response to treatment [@Zekavat2023], and there is 
+some evidence for sex differences in retinal structural parameters.[@Ryoo2018]
+
+Hypertension can lead to hypertensive retinopathy which results in 
+blurred vision, reduced vision, or even complete loss of sight if 
+left untreated.[@Dziedziak2022] Likewise, diabetic retinopathy is 
+a common microvascular complication of diabetes mellitus that can cause
+vision loss and blindness.[@Wang2018] Furthermore, alcohol consumption
+is associated with open-angle glaucoma.[@Grant2023]
+
+Obesity is a well-known risk factor, as indicated by BMI, for a 
+wide range of health conditions, and is associated in thinner 
+retinal layer thickness.[@Laiginhas2019;@Wsowska2022] Similarly, smoking has
+been linked to an increased risk of various diseases, including those
+affecting the eyes.[@Zekavat2023]
+
+The Townsend Deprivation Index in the UK Biobank reflects socioeconomic
+status, which can influence health outcomes, including those related
+to ophthalmic health.[@Zekavat2023]
+
+The quality of optical coherence tomography images can influence 
+the ability to detect macular changes.
+
+Different genotyping arrays can have varying levels of accuracy or
+might target different sets of genetic variations and thus affect 
+the computation of polygenic risk scores.[@Verlouw2021]
+Likewise, the first ten genetic principal components account for
+population stratification, which can confound genetic associations.
+Including them in our models helps to ensure that any associations
+found are not due to underlying population genetic differences.
+[@Wsowska2022]
+
+## Statistical thresholding
+Statistical significance for individual analyses was defined as p <
+0.05. The pFWER significance threshold using the Holm-Bonferroni method was
+set at pFWER < 0.1.
+
+## Inflammatory biomarkers
+The UK Biobank has meticulously recorded an array of inflammatory 
+biomarkers between the years 2006 and 2010. Comprehensive details 
+about their storage and analysis are available at the Biobank showcase. 
+Peripheral blood cell counts, including lymphocyte, monocyte, neutrophil, 
+and platelet counts, were obtained using an automated Coulter LH 750 analyzer. 
+The instrument's differential blood cell count analysis provided calculated 
+values for neutrophil, lymphocyte, and monocyte counts, with an operating 
+range of 0.00–900.00 × 10^9 cells/L. Platelet counts were obtained directly 
+from instrument measurements, with an operating range of 0.00–5000 × 10^9 cells/L. 
+Using these peripheral blood cell counts, we derived four systemic 
+inflammation markers: Systemic Immune-Inflammation Index (SII), 
+Neutrophil-to-Lymphocyte Ratio (NLR), Platelet-to-Lymphocyte Ratio (PLR),
+and Lymphocyte-to-Monocyte Ratio (LMR). The calculations for these markers were as follows: 
+SII = (neutrophils × platelets) / lymphocytes, 
+NLR = neutrophils / lymphocytes, 
+PLR = platelets / lymphocytes, and LMR = lymphocytes / monocytes.[@Nost2021]
+The measurement of serum C-reactive protein (CRP) levels was carried out using a 
+high-sensitivity immunoturbidimetric method on a Beckman
+Coulter AU5800 analyzer. In our analysis, we applied a logarithmic
+transformation to the CRP levels to address their notably skewed
+distribution, as illustrated in Fig. \@ref(fig:figs6).
+
+## Partial effect analyses
+In order to visualize individual phenotypes, we computed the
+correlation coefficients between the polygenic risk scores for
+schizophrenia and overall macular thickness
+while regressing out all confounding factors. Additionally, we 
+extended this analysis to the combined thickness of 
+outer retinal layers of the macula.
+
+## Mediation analysis
+We further sought to elucidate the mechanisms underlying the
+association between a pathway-enriched polygenic risk score for
+schizophrenia, specifically the neuroinflammatory pathway, and
+inner and outer retinal thickness. Moreover, we investigated the potential
+mediating role of various inflammatory biomarkers in this relationship.
+The rationale for examining these markers as a mediator is grounded in the evidence linking
+neuroinflammatory processes to the pathophysiology of schizophrenia.
+[@Fond2018;@Prins2016] Elevated levels of inflammatory biomarkers have been associated
+with increased risk and severity of schizophrenia, suggesting that
+inflammation may be a biological pathway through which genetic risk
+factors exert their effects on retinal phenotypes. To assess the
+mediation effect, we conducted a robust mediation analysis using two
+models. The mediator model was a robust linear regression that
+predicted inflammatory levels from neuroinflammatory-enriched polygenic risk for schizophrenia while
+controlling for before mentioned covariates. This model allowed us to
+estimate the effect of neuroinflammatory polygenic risk for schizophrenia on inflammatory biomarkers (Path A).  The
+outcome model was another robust linear regression that predicted 
+ganglion cell-inner plexiform layer thickness from both 
+neuroinflammatory-specific polygenic risk for schizophrenia and markers, controlling for the
+same covariates. This model provided estimates for the direct effect
+of neuroinflammatory-specific polygenic risk for schizophrenia on retinal thickness (Path C) 
+and the effect of inflammatory biomarkers on retinal thickness
+while accounting for neuroinflammatory-specific polygenic risk for schizophrenia (Path B). 
+
+The indirect effect (Path C' = Path A * Path B), representing the
+mediation effect of inflammatory biomarkers, was calculated as the product of the
+coefficients from Paths A and B. To evaluate the significance of the
+effect, we employed a bootstrap method with 1000 resamples, generating
+empirical confidence intervals for the mediation effect. This
+non-parametric approach allowed us to infer the robustness of the
+mediation effect without relying on the assumptions of normality. The
+p-value associated with this effect was computed through confidence
+interval inversion.
+
+Since fasting significantly reduces the number of circulating monocytes [@Jordan2019],
+we included fasting time as an additional covariate in this mediation analysis.
+
+## Data availability
+All data utilized in this study is publicly available at the
+UK Biobank (http://www.ukbiobank.ac.uk/).
+
+## Code availability
+All data analyses were performed between June 2023 and
+Feburary 2024 using Python (version 3.9.12) and R (version 4.0.5).
+The manuscript was produced with the R packages rmarkdown
+(version `r packageVersion("rmarkdown")`) [@Allaire2014]; 
+MASS [@Ripley2009]; SjPlot [@Ldecke2013]; 
+represearch (https://github.com/phoman/represearch/); 
+kableExtra [@Zhu2017]; 
+knitr [@Xie2012];
+papaja [@Aust2022];
+matplotlib [@Hunter2007];
+seaborn [@Waskom2021]; and
+scipy.[@Virtanen2020]
+All code will be made freely available after publication 
+to ensure reproducibility at
+https://github.com/homanlab/prsoct/.
+
+## Declaration of generative AI and AI-assisted technologies in the writing process
+During the preparation of this work the authors used [OpenAI / GPT-4] in order 
+to summarize their results. After using this tool, the authors reviewed and edited 
+the content as needed and take full responsibility for the content of the publication.
+
+## Inclusion and Ethics Statement
+This study utilized data from the UK Biobank, a large-scale biomedical database 
+and research resource containing in-depth genetic and health information from 
+half a million UK participants. Ethical approval for the use of UK Biobank data 
+was obtained from the North West Multi-centre Research Ethics Committee (MREC). 
+All participants provided informed consent, and data were anonymized to protect
+participant privacy. The research team adhered to the UK Biobank's policies on 
+data access and usage, ensuring compliance with ethical standards and legal 
+requirements. The study design and analysis were conducted with a commitment to
+inclusivity to ensure broad applicability of the findings.
+
+# Results
+## Overall reporting details
+Out of the `r results$n_total[1]` individuals recruited with available
+genetic and retinal data, `r n_model_left` 
+individuals (`r round((n_model_left/results$n_total[1])*100, digit=1)` %) were
+included for further analysis. Of these
+participants, `r results$female[1]` (`r round((results$female[1]/n_model_left)*100, digit=2)` %) were females,
+and `r results$male[1]` (`r round((results$male[1]/n_model_left)*100, digit=2)` %) 
+were males (Table \@ref(tab:tab1)).
+We excluded `r results$n_total[1]-n_model_left` 
+individuals due to various QCs of genetic and optical coherence tomography data, 
+eye diseases and disorders, the use of antipsychotic medications, and a diagnosis of
+ICD-10 (F20-F29). For more details, see Fig. \@ref(fig:fig2).
+
+The linear regression models resulting from the analysis of the relationship 
+between polygenic risk scores for schizophrenia and retinal phenotypes 
+displayed heteroscedasticity. This was evidenced by all Breusch-Pagan tests
+yielding a chi-square statistic of $\chi^2$ = `r ttest_macula_stat` 
+with `r mean_macula_pcbppval`. This indicates that the variance 
+of the residuals was not constant across the range of values, suggesting 
+that the precision of the regression estimates varies depending on the 
+level of the polygenic risk scores.
+
+```{r tab1, include = TRUE, out.width="100%"}
+tab1_capt <- "Sample characteristics"
+tab1 <- kableExtra::kable(df_nsex, caption = tab1_capt, row.names = F, booktabs = TRUE, format = "latex")
+tab1 %>% kableExtra::kable_styling(font_size = 7)
+```
+
+## Polygenic risk for schizophrenia is associated with overall macular and outer retinal thickness
+The primary dependent variable of the study was the retinal thickness at the macula.
+We conducted robust regression analyses to examine the relationships
+between polygenic risk scores for schizophrenia and mean macular 
+thickness. We observed a negative relationship between macular thickness and polygenic risk 
+scores for schizophrenia (b = `r mean_macula_b`, CI = [`r mean_macula_conflow`, `r mean_macula_confhigh`], `r format_p(mean_macula_p,stars = FALSE)`; Figure \@ref(fig:fig1)b).
+This means that for each one standard deviation increase in polygenic risk for 
+schizophrenia, the thickness of the macula decreased by `r abs(mean_macula_b)` micrometers. 
+These robust regression results were similar to those obtained from the imputed dataset analysis (b = `r mean_macula_imp_b`, CI = [`r mean_macula_imp_conflow`, `r mean_macula_imp_confhigh`], `r format_p(mean_macula_imp_p,stars = FALSE)`), 
+suggesting the stability of the observed associations across different missing data handling approaches.
+Detailed association analysis results for left and right eye and their repective subfields can be 
+viewed in the Supplementary Information (Fig. \@ref(fig:figs1) and Table \@ref(tab:tabs1)). Since the association between inner retinal 
+thickness (specifically retinal nerve fiber layer, ganglion cell-inner plexiform layer, and inner nuclear layer)
+has been recently investigated [@Blose2024], we extended our analysis to the outer retina.
+Strikingly, we also found a similar negative association 
+for the outer retinal thickness (b = `r mean_outerret_b`, CI = [`r mean_outerret_conflow`, `r mean_outerret_confhigh`], `r format_p(mean_outerret_p,stars = FALSE)`, pFWER = `r round(adjust_macularfwer[2],digits=3)`;
+Fig. \@ref(fig:fig1)c). For robust regression results for the inner and outer retina, see Table \@ref(tab:tabs1a).
+
+## Neuroinflammatory pathway-specific polygenic risk scores are associated with thicknesses of specific layers in the inner retina
+Pathway-specific polygenic risk scores are crucial for association analysis 
+with retinal thickness because they allowed us to pinpoint specific biological 
+mechanisms underlying the observed retinal changes in schizophrenia patients.
+Intriguingly, we observed that higher polygenic risk scores specific to
+neuroinflammation in relation to schizophrenia were significantly associated
+with thinner ganglion cell-inner plexiform layers (b = `r subset(df_pathcomp_reord, Pathway == "NEUROINFLAM_PRS" & Phenotype == "GCIPL")$Estimate[1]`, 
+self-contained `r format_p(subset(df_pathcomp_reord, Pathway == "NEUROINFLAM_PRS" & Phenotype == "GCIPL")$selfcontained.p[1],stars = FALSE)`, 
+competitive `r format_p(subset(df_pathcomp_reord, Pathway == "NEUROINFLAM_PRS" & Phenotype == "GCIPL")$competitive.p[1],stars = FALSE)`) (Table \@ref(tab:tab4)). 
+We found no statistically significant associations with other gene
+pathways that potentially could be related to schizophrenia (for more details, see
+Table \@ref(tab:tabs3)).
+
+```{r tab4capt}
+tab4capt <- "Association between polygenic risk for
+schizophrenia enriched for multiple gene pathways and
+inner and outer retinal thickness at p-value threshold 1.
+Microvasculature pathways:
+1. Human phenotype (HP) abnormal retinal vascular morphology (M43559)
+2. HP premature coronary artery atherosclerosis (M36658).
+Inflammatory pathways:
+1. Gene Ontology Biological Process (GOBP) acute inflammatory response (M6557)
+2. GOBP neuroinflammatory response (M24927)
+3. Biocarta TGFB pathway (M18933)
+4. GOBP chronic inflammatory response (M15140).
+Signaling pathways influencing neuronal development:
+1. GOBP Wnt signaling pathway involved in midbrain dopaminergic neuron differentiation (M25305)
+2. GOBP positive regulation of dopamine receptor signaling pathway (M24111)
+3. ST Wnt beta catenin pathway (M17761).
+Standard errors in brackets. * p<0.05, ** p<0.01.
+RNFL, Retinal nerve fiber layer;
+GCIPL, Ganglion cell layer to inner plexiform layer;
+INL, Inner nuclear layer;
+INLRPE, Inner nuclear layer to retinal pigment epithelium.
+"
+```
+
+```{r tab4, include = TRUE, fig.cap = tab4capt, fig.env = "figures*", out.width="100%"}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(kableExtra)
+
+df_pathprs <- read.csv("../output/data/pathwayreg_results.csv")
+
+table_data <- df_pathprs %>%
+  dplyr::select(GeseaPathwayCode, Phenotype, Estimate, SE, selfcontained.p) %>%
+  pivot_wider(
+    names_from = Phenotype,
+    values_from = c(Estimate, SE, selfcontained.p),
+    names_sep = "_",
+    values_fn = list(Estimate = first, SE = first, selfcontained.p = first)
+  ) %>%
+  mutate(
+    RNFL = sprintf(
+      "%.2f%s (%.2f)",
+      Estimate_RNFL,
+      ifelse(selfcontained.p_RNFL < 0.05, "*", ""),
+      SE_RNFL
+    ),
+    GCIPL = sprintf(
+      "%.2f%s (%.2f)",
+      Estimate_GCIPL,
+      ifelse(selfcontained.p_GCIPL < 0.05, "*", ""),
+      SE_GCIPL
+    ),
+    INL = sprintf(
+      "%.2f%s (%.2f)",
+      Estimate_INL,
+      ifelse(selfcontained.p_INL < 0.05, "*", ""),
+      SE_INL
+    ),
+    INLRPE = sprintf(
+      "%.2f%s (%.2f)",
+      Estimate_INLRPE,
+      ifelse(selfcontained.p_INLRPE < 0.05, "*", ""),
+      SE_INLRPE
+    )
+  ) %>%
+  dplyr::select(GeseaPathwayCode, RNFL, GCIPL, INL, INLRPE) %>%
+  distinct()
+
+# Create the kable table
+kbl(table_data,
+  format = "latex",
+  booktabs = TRUE,
+  align = c("l", "c", "c", "c", "c"),
+  caption = tab4capt
+) %>%
+  kable_styling(latex_options = c("hold_position", "scale_down")) %>%
+  footnote(symbol = "p < 0.05")
+```
+
+```{r, include = FALSE}
+df_gcipl <- read.csv("../output/data/mediation_analysis_GC_IPL_mean.csv")
+colnames(df_gcipl)[1] <- ""
+```
+## C-reactive protein levels partially mediate the association between neuroinflammatory pathway-specific polygenic risk for schizophrenia and retinal thickness
+The UK Biobank also provided us with inflammatory marker measurements, 
+which play a pivotal role in managing inflammation. 
+Therefore, we explored the mediating role of these markers in the relationship between 
+neuroinflammatory-enriched polygenic risk scores for schizophrenia and
+ganglion cell-inner plexiform layer as an outcome variable (Table \@ref(tab:tab5)).
+The mediator model revealed a significant effect of neuroinflammatory-specific 
+polygenic risk scores for schizophrenia on CRP (Path A coefficient = `r a_coefficient`), 
+controlling for confounding factors. This positive correlation between 
+neuroinflammation gene enriched polygenic risk scores for schizophrenia and CRP
+levels suggests that individuals with a higher genetic risk for schizophrenia, 
+particularly in genes related to neuroinflammation, tend to exhibit elevated 
+levels of systemic inflammation, as measured by CRP. 
+concentrations. Furthermore, the outcome model showed a significant 
+effect of CRP on ganglion cell-inner plexiform layer thickness, after accounting 
+for the same covariates, fasting time, and neuroinflammatory polygenic risk for schizophrenia.
+The estimated indirect effect of neuroinflammatory-specific polygenic risk for schizophrenia on ganglion cell-inner plexiform layer through the 
+mediator CRP was `r sprintf("%1.3f", indirect_effect)`, with a 95% bootstrap confidence interval 
+of [`r sprintf("%1.3f", medCI_low)`, `r sprintf("%1.4f", medCI_high)`], suggesting a statistically significant 
+partial mediation effect (`r format_p(boot_p_value,stars=FALSE)`). 
+This means that part of the negative impact of neuroinflammatory-specific polygenic risk scores for 
+schizophrenia on ganglion cell-inner plexiform layer is mediated by increased CRP levels. 
+More specifically, approximately `r prop_mediated`% of the total effect of neuroinflammatory-specific 
+polygenic risk scores for schizophrenia on retinal thickness is mediated by CRP levels.
+This result indicates that while CRP does play a statistically significant role in mediating 
+the relationship between genetic risk for schizophrenia and retinal thinning, its contribution 
+is relatively small. The majority of the effect (about `r 100-prop_mediated`%) is likely due to 
+direct effects or other mediating factors not captured by CRP levels alone.
+For all other inflammatory markers we did not find such a mediation effect.
+
+```{r tab5capt}
+tab5capt <- "Mediation effects of inflammatory marker on the association
+between neuroinflammatory-specific polygenic risk for schizophrenia and
+ganglion cell-inner plexiform layer thickness.
+SII, Systemic Immune-Inflammation Index; NLR, Neutrophil-to-Lymphocyte Ratio;
+PLR, Platelet-to-Lymphocyte Ratio; LMR, Lymphocyte-to-Monocyte Ratio;
+CRP, C-reactive protein levels;
+* = p < 0.05, ** = p < 0.01, *** = p < 0.001"
+```
+
+```{r tab5, include = TRUE, tab.cap = tab5capt, tab.env="table*", out.width = "100%"}
+create_table <- function(data, caption) {
+  kable(data,
+    longtable = FALSE,
+    booktabs = TRUE,
+    caption = tab5capt,
+    align = "c"
+  ) %>%
+    kable_styling(
+      latex_options = c("hold_position"),
+      full_width = TRUE,
+      font_size = 7
+    ) %>%
+    column_spec(1, bold = TRUE) %>%
+    row_spec(0, bold = TRUE)
+}
+create_table(df_gcipl, "GC-IPL")
+```
+
+# Discussion
+In this large observational study in healthy individuals, we found
+that an increased genetic risk for schizophrenia is associated with
+lower retinal thickness. This demonstrates that schizophrenia's genetic
+risk factors affect not just the brain but also the retina. 
+This result reaffirms the findings of a recent study of the genetic 
+contribution to retinal thickness within the context of schizophrenia 
+risk [@Blose2024], in which it was found that, using inner retina-specific 
+analyses, higher genetic risk for schizophrenia is associated with thinner 
+ganglion cell-inner plexiform layers. Our results extend these findings 
+by providing evidence that greater genetic risk for schizophrenia is 
+also associated with thinner outer retinal thickness. This presents a 
+more complete picture on the connection between genetic risk and retinal morphology. 
+
+What are the exact mechanisms underlying these retinal alterations in 
+individuals with greater genetic risk for schizophrenia?
+We provide a potential explanation whereby the expression or 
+activity of a set of genes may trigger neuroinflammatory 
+cascades that affect retinal structure, resulting in measurable 
+changes to the thickness of the ganglion cell-inner plexiform layer.  
+This finding holds great importance as it provides a 
+unique window into the neurobiological underpinnings of schizophrenia, 
+potentially revealing early markers of disease risk and progression. 
+
+Inflammatory processes can disrupt the normal functioning of astrocytes,
+potentially leading to neurotransmitter dysregulation and blood–brain
+barrier permeability.[@Pan2021;@Cruz2023] Blood-brain barrier
+disruption, caused by pro-inflammatory cytokines and chemokines, can
+exacerbate neuroinflammation by allowing immune cells and potentially
+harmful substances to enter the brain.[@Pan2021;@Gullotta2023] This
+can lead to the release of acute-phase proteins, oxidative stress,
+excitotoxicity, and other processes that cause neuronal damage. This in turn
+affects synaptic functioning, which is critical for normal cognitive
+processes and has been found to be disrupted in schizophrenia.
+[@Pan2021;@Gullotta2023] Acute-phase proteins like CRP can also
+contribute to the progressive apoptosis of photoreceptors.
+[@Kaur2021;@Noailles2016] This might explain our finding of a
+partial mediation effect of CRP, suggesting its mediating role next to
+other potential candidates, on the association between
+neuroinflammatory enriched polygenic risk scores for schizophrenia and
+retinal thickness. In the case that CRP does serve a mediating role, 
+this would suggest that neuroinflammatory processes, as
+indexed by CRP levels, could be a key biological pathway through which
+genetic risk factors for schizophrenia contribute to macular effects.
+While a previous study found no association between the levels of
+inflammatory markers (CRP among others) and retinal thickness in
+either the schizophrenia or control group [@Carriello2023], that study
+was considerably smaller than the present study. It is possible that
+such an effect can only be detected with substantially more
+statistical power, coming from a large sample size as in our study.
+
+Intriguingly, the fact that CRP mediation affects the ganglion 
+cell-inner plexiform layer suggests that the inflammatory processes 
+associated with schizophrenia risk may have selective effects throughout
+the retina, presumably targeting amacrine cells in that layer.[@Boudriot2024]
+By examining differential effects on retinal layers, we gained insights 
+into specific cellular and molecular pathways implicated in the disorder, which may lead to the 
+development of more targeted therapeutic interventions.
+
+We also explored more genetic pathways that may contribute to 
+retinal effects in individuals with increasing polygenic risk for schizophrenia. 
+For instance, Wnt signaling pathways could play a significant role in 
+the protection of damaged retinal neurons.[@Ohlmann2021;@Valle2022;@Zhuang2023] 
+They have been shown to have a significant impact on retinal vessel 
+formation and maturation, as well as on the establishment of synaptic 
+structures and neuronal function in the central nervous system.[@Ohlmann2021]
+The activation of certain Wnt pathways has been shown to reverse the 
+pathological phenotype caused by Wnt inhibition in the context of glaucoma.
+[@Dhamodaran2020] However, in the case of the present study, neither of the
+Wnt signaling pathways showed a significant association with 
+macular thickness changes. This could be because our selection 
+of these pathways was very limited and/or the gene sets of these pathways 
+did not fully capture the polygenic nature of the effects.
+
+In summary, the genetic risk factors for schizophrenia, as represented
+by the polygenic risk scores, may influence neuroinflammatory pathways
+involved in the disease. These pathways could, in
+turn, affect the neural and vascular integrity of the retina, leading
+to observable retinal changes. While we observed a
+relationship between polygenic risk scores and retinal layer thickness 
+at the macula, we did not observe any associations between retinal
+microvasculature gene-based polygenic risk scores for schizophrenia
+and retinal phenotypes. This could be due to the fact that genetic
+architecture of retinal microvasculature traits and schizophrenia risk
+is complex and again, the selected pathways were not able to capture
+this relationship. Alternatively, retinal thickness in individuals with
+high polygenic risk for schizophrenia may also be influenced by other
+factors e.g. systemic comorbidities like metabolic dysfunction, 
+certain health behaviors, and life-course exposures,
+which were not evaluated in this study. Future investigations should 
+explore potential gene-environment interactions. For example, given 
+the known effects of smoking on retinal inflammation and ocular health [@Oishi2020;@Wang2021], 
+research should examine whether there is an interaction between PRS 
+for schizophrenia, smoking, and retinal thinning. Such research could 
+provide valuable insights into how lifestyle factors may accelerate 
+neurodegeneration in genetically predisposed individuals. [@Koster2024].
+
+Several limitations merit comment. The UK Biobank sample is not fully 
+representative of the UK population, due to its low response rate, 
+under-representation of younger individuals and socioeconomically 
+deprived areas, and lower prevalence of certain health conditions 
+like schizophrenia. Our study focused on participants of British or 
+Irish descent, as they constituted the majority of the available 
+data. All of this limits our results in their generalizability to a 
+wider population. Moreover, while robust regression provides advantages 
+in handling outliers and heteroscedasticity, it is crucial to interpret 
+the results in the context of the method's characteristics. The downweighting of 
+extreme observations might dillute extreme but genuine phenomena.
+We would also like to note that the temporal disparity in data collection 
+introduced potential unmeasured confounding factors, such as lifestyle 
+changes, medical interventions, or environmental influences, which could 
+independently affect inflammatory marker levels or retinal measurements.
+Finally, the polygenic risk score's explanatory power for schizophrenia
+is modest, which may have limited the detection of small effects. A `r mean_macula_b` µm 
+change represents only about 0.065% of the average overall macular thickness. 
+This extremely small variation is very unlikely to have an impact 
+on visual acuity, given previous evidence that a much larger change in 
+retinal thickness was associated with only a minimal change in visual acuity.[@Lee2021]
+
+Our study also had several strengths, including the use of a large,
+population-based sample from the UK Biobank, which allowed us to avoid
+confounding factors related to psychotic and retinal abnormalities or
+antipsychotic use. We also employed robust statistical analyses and
+complementary techniques to enhance the reliability of our
+results. Additionally, our extended analyses produced consistent
+findings across multiple inclusion thresholds for the polygenic risk
+score. Our study further benefits from the establishment of temporal 
+precedence in the mediation analysis, as inflammatory biomarkers were 
+measured before retinal thickness outcomes, strengthening the causal 
+interpretation of our findings.[@Mendelson2023]
+
+In conclusion, our study identified significant associations between 
+polygenic risk scores for schizophrenia, pathway-specific scores, and 
+specific retinal layers, offering valuable insights into the genetic 
+contributions to retinal changes in individuals without any diagnosis 
+of schizophrenia. These findings suggest that the retina may serve not 
+only as a "window" into the brain but also as a mirror reflecting the 
+genetic complexities of schizophrenia. They allow us to better 
+distinguish between primary effects of genetic risk and secondary 
+consequences of the disorder. While our results increase 
+confidence that retinal thinning may be associated with core processes 
+in schizophrenia, further research is crucial to establish the specificity 
+and sensitivity of retinal thinning as a reliable indicator of core 
+degenerative processes in the disorder. Future studies should focus 
+on disentangling the complex interplay between genetic predisposition, 
+environmental factors, and comorbid conditions that can affect retinal 
+health, to determine the true potential of retinal changes as a 
+biomarker for schizophrenia-related processes.
+
+# Acknowledgements
+Figures 1a and 1c include graphics created with BioRender.com.
+
+# Role of the funding source
+PH is supported by a NARSAD grant from the Brain & Behavior Research
+Foundation (28445) and by a Research Grant from the Novartis
+Foundation (20A058). The study design, data collection, data analysis,
+data interpretation, and report writing was conducted independently,
+without involvement from the funders.
+
+T.L. was supported by the National Institute of Mental Health of the
+National Institutes of Health (NIH) under award no. R01MH117646 (T.L.,
+principal investigator). The content is solely the responsibility of
+the authors and does not necessarily represent the official views of
+the NIH.
+
+# Competing interests
+PH has received grants and honoraria from Novartis, Lundbeck, Mepha,
+Janssen, Boehringer Ingelheim, Neurolite outside of this work. No other
+disclosures were reported.
+
+# Author contributions
+FR: conceptualization, methodology, statistical analysis, visualization, writing, review and editing.
+LK: methodology, genetic analysis, writing, review and editing.
+FG: conceptualization, methodology and statistical analysis.
+NK: conceptualization and supervision. 
+WO: review and editing.
+VE: review and editing.
+MK: review and editing.
+FC: review and editing.
+EG: methodology, review and editing.
+SS: supervision, review & editing.
+BB: review & editing.
+DB: review & editing.
+KS: review & editing.
+JR: review & editing.
+TL: supervision, methodology, review & editing.
+PH: supervision, conceptualization, writing, review and editing.
+
+# References
+<div id = "refs"></div> 
+
+\onecolumn
+\clearpage
+\beginsupplement
+
+# Supplementary Information
+## Supplementary Results
+### Gene pathways from the Molecular Signatures Database (MSigDB) version 7.4 utilized in pathway-based analysis
+**GOBP_NEUROINFLAMMATORY_RESPONSE** > Neuroinflammatory response is the 
+nervous system's reaction to various forms of damage, including 
+infection, traumatic brain injury, toxic metabolites, or autoimmunity. 
+[ADCY1	ADCY8	ADORA2A	AGER	AIF1	APP	ATM	AZU1	BPGM	C1QA	C5AR1	CCL3	
+CD200	CD200R1	CD200R1L	CLU	CNTF	CST7	CTSC	CX3CL1	CX3CR1	DAGLA	GNAT2	
+GRN	IFNG	IFNGR1	IFNGR2	IGF1	IL13	IL18	IL1B	IL33	IL4	IL6	ITGAM	ITGB1	
+ITGB2	JAK2	KCNJ8	LARGE1	LDLR	LRP1	LRRK2	MAPT	MIR128-1	MIR142	MIR181B1	
+MIR181C	MIR195	MIR206	MIR26A1	MMP3	MMP8	MMP9	NAGLU	NR1D1	NR3C1	NUPR1	
+PLCG2	POMGNT1	POMT2	PSEN1	PTGS2	PTPRC	SMO	SNCA	SPHK1	STAP1	SYT11	TAFA3	
+TLR2	TLR3	TLR6	TLR9	TNF	TNFRSF1B	TREM2	TRPV1	TTBK1	TYROBP	VPS54	ZEB2]\
+
+**GOBP_CHRONIC_INFLAMMATORY_RESPONSE** > This identifier is related to 
+the chronic inflammatory response. A chronic inflammatory response 
+is a prolonged inflammatory reaction that can lead to tissue 
+damage and is involved in various diseases. [ADORA2B	CCL5	CXCL13	
+CYP19A1	FOXP3	IDO1	IL10	IL4	LTA	NFKBIZ	S100A8	S100A9	SCN11A	
+THBS1	TNF	TNFAIP3	UNC13D	VCAM1	VNN1]\
+
+**BIOCARTA_TGFB_PATHWAY** > The TGF beta signaling pathway is a 
+cellular mechanism that regulates various biological processes, 
+including cell growth, differentiation, and apoptosis, and it 
+plays a dual role in inflammation by both promoting and inhibiting 
+inflammatory responses depending on the contex [APC CDH1 
+CREBBP EP300 MAP2K1 MAP3K7 MAPK3 SKIL SMAD2 SMAD3 SMAD4 SMAD7
+TAB1 TGFB1 TGFB2 TGFB3 TGFBR1 TGFBR2 ZFYVE9]\
+
+**GOBP_ACUTE_INFLAMMATORY_RESPONSE** > Inflammation is characterized by a swift, transient, and relatively consistent reaction to acute 
+harm or antigen exposure, marked by fluid, plasma protein, and granulocytic leukocyte accumulations. 
+This acute inflammatory response, which unfolds within minutes or hours, either resolves in a 
+few days or transitions into a chronic inflammatory state. [A2M ACVR1 ADAM8 
+ADORA1 ADRA2A AHSG ALOX5AP ANO6 APCS APOA2 APOL2 ASH1L ASS1 B4GALT1 BTK C2CD4A C2CD4B C3 CCR7 CD163 CD6 CEBPB CNR1 
+CREB3L3 CRP CTNNBIP1 DNASE1 DNASE1L3 EDNRB EIF2AK1 ELANE EPO EXT1 F12 F2 F3 F8 FCGR1A FCGR2B FCGR3A FFAR2 FFAR3 FN1 
+FUT7 GATA3 GSTP1 HAMP HLA-E HP HPR IGHG1 IL1A IL1B IL20RB IL22 IL31RA IL4 IL6 IL6R IL6ST INS ITIH4 KL KLKB1 LBP MBL2 
+MIR92A1 MRGPRX1 MYLK3 NLRP3 NLRP6 NPY NPY5R NUPR1 OGG1 OPRM1 ORM1 ORM2 OSM OSMR PARK7 PIK3CG PLA2G2D PLSCR1 PRCP PTGER3 
+PTGES PTGS2 REG3A REG3G RHBDD3 S100A8 SAA1 SAA2 SAA4 SELENOS SERPINA1 SERPINA3 SERPINF2 SIGIRR TACR1 TFR2 TFRC TNF 
+TNFRSF11A TNFSF11 TNFSF4 TREM1 TRPV1 UGT1A1 VCAM1 VNN1 ZP3]\
+
+**HP_ABNORMAL_RETINAL_VASCULAR_MORPHOLOGY** > An identifier 
+suggests a phenotype related to abnormal morphology (structure) of the 
+blood vessels in the retina. [ABCA4	ABCC6	ACVRL1	AGBL5	AHI1	
+AHR	AIPL1	ANTXR1	APOC2	ARHGEF18	ARL2BP	ARL3	ARL6	ARV1	
+ARVCF	ASAH1	ATF6	BAZ1B	BBS1	BBS2	BBS9	BCL7B	BEST1	BUD23	
+CA4	CAPN5	CC2D2A	CCDC28B	CCM2	CCND1	CDHR1	CENPF	CERKL	CFAP410	
+CFAP418	CHM	CLCC1	CLCNKB	CLIP2	CLRN1	CNGA1	CNGA3	CNGB1	CNGB3	
+CNNM4	COL18A1	COL4A1	COMT	CRB1	CRX	CTC1	CTNNB1	CTSA	CYP1B1	
+CYP27A1	DARS1	DGCR2	DGCR6	DGCR8	DHDDS	DHX38	DLK1	DLST	DNAJC30	
+DNMT3A	DNMT3B	DUX4	DUX4L1	EFEMP1	EIF4H	ELN	ENG	ENPP1	EPAS1	
+ERCC4	ESS2	ETHE1	EYS	F12	FAM161A	FGF12	FH	FKBP6	FLVCR1	FRG1	
+FSCN2	FUCA1	FZD4	G6PC1	GALC	GDF2	GGCX	GLB1	GM2A	GNAQ	
+GNAT2	GP1BB	GPIHBP1	GTF2I	GTF2IRD1	GTF2IRD2	GUCA1B	GUCY2D	
+HARS1	HEXA	HEXB	HGSNAT	HIRA	HK1	HLA-A	HSD11B2	IDH3A	IDH3B	
+IFT140	IFT172	IFT43	IFT88	IGFBP7	IKBKG	IMPDH1	IMPG1	IMPG2	
+IVNS1ABP	JMJD1C	KIAA1549	KIF1B	KIZ	KLHL7	KRIT1	LAMB2	LCA5	
+LCK	LIMK1	LOXL1	LPL	LRAT	LRP5	LRRC32	MAK	MAX	MDH2	MEG3	
+MERTK	METTL27	MKS1	MLXIPL	MT-ATP6	MT-CO1	MT-CO3	MT-CYB	
+MT-ND1	MT-ND2	MT-ND4	MT-ND4L	MT-ND5	MT-ND6	MVK	MYD88	
+MYOC	NCF1	NDP	NDUFS2	NEK1	NEK2	NEU1	NF1	NMNAT1	NOD2	
+NR2E3	NRL	NUS1	OFD1	PAX6	PCARE	PCNA	PDCD10	PDE6A	PDE6B	
+PDE6C	PDE6G	PDE6H	PIK3CA	POMGNT1	PRCD	PROM1	PRPF3	PRPF31	
+PRPF4	PRPF6	PRPF8	PRPH2	PSAP	RAX2	RBP3	RDH11	RDH12	RDH5	
+REEP6	RET	RFC2	RGR	RHO	RLBP1	ROM1	RP1	RP1L1	RP2	RP9	RPE65	
+RPGR	RPGRIP1	RREB1	RTL1	RTTN	SAG	SCAPER	SDHA	SDHAF2	
+SDHB	SDHC	SDHD	SEC24C	SELENOI	SEMA4A	SERPINC1	SETD2	
+SLC24A1	SLC25A11	SLC37A4	SLC6A6	SLC7A14	SMAD4	SMCHD1	
+SMPD1	SNRNP200	SPATA7	SSBP1	STN1	STX1A	TBL2	TBX1	TLCD3B	
+TMEM127	TMEM231	TMEM270	TOPORS	TREX1	TSPAN12	TTC8	TUB	
+TULP1	UFD1	UNC119	USH2A	USP45	VHL	VPS37D	WDR19	WT1	
+YME1L1	ZNF408	ZNF513]\
+
+**HP_PREMATURE_CORONARY_ARTERY_ATHEROSCLEROSIS** > This term refers a gene set that is related
+to the premature development of atherosclerosis in the coronary arteries, 
+which can lead to coronary artery disease (CAD). [ABCA1	ABCG5	ABCG8	ACTA2	
+APOA1	APOB	APOE	CEP19	CYP27A1	ERCC6	ERCC8	GPIHBP1	LDLR	LDLRAP1	LIPC	
+LMNA	LRP6	MEF2A	PCSK9]\
+
+**ST_WNT_BETA_CATENIN_PATHWAY** > This identifier refers to a gene pathway 
+involved in the Wnt/beta-catenin signaling. The Wnt/beta-catenin 
+pathway is crucial for various cellular processes, including 
+development, cell proliferation, and differentiation. [AKT1	AKT2	AKT3	
+ANKRD6	APC	AXIN1	AXIN2	CBY1	CER1	CSNK1A1	CTNNB1	CXXC4	DACT1	
+DKK1	DKK2	DKK3	DKK4	DVL1	FRAT1	FSTL1	GSK3A	GSK3B	LRP1	MVP	
+NKD1	NKD2	PIN1	PSEN1	PTPRA	RPSA	SENP2	SFRP1	TSHB	WIF1]\
+
+**GOBP_WNT_SIGNALING_PATHWAY_INVOLVED_IN_MIDBRAIN_DOPAMINERGIC_NEURON_DIFFERENTIATION** > This 
+identifier contains genes that are related to the role of the Wnt signaling pathway 
+in the differentiation of dopaminergic neurons in the midbrain. This process is 
+important for the development of the nervous system and is particularly relevant 
+to the study of diseases like schizophrenia and Parkinson's disease, where dopaminergic neurons are affected.
+[CSNK1D	CSNK1E	CTNNB1	FZD1	LRP6	RYK	WNT1	WNT2	WNT3	WNT3A	WNT5A	WNT9B]\
+
+**GOBP_POSITIVE_REGULATION_OF_DOPAMINE_RECEPTOR_SIGNALING_PATHWAY** > This 
+identifier contains genes responsible for a biological process that positively 
+regulates the signaling pathway of dopamine receptors. Dopamine receptors are 
+critical for many neurological processes, and their signaling pathways are 
+important in the context of neurological diseases, e.g. schizophrenia 
+and Parkinsons's disease. [CAV2	DRD3	LRRK2	PRMT5	VPS35]
+
+\clearpage
+
+## Supplementary Tables
+\clearpage
+```{r tabs1a, include = TRUE}
+tabs1a_capt <- "Robust regression results for inner and outer retina"
+df_phenotypes$Phenotype <- gsub("_", " ", df_phenotypes$Phenotype)
+tabs1a <- kableExtra::kable(df_phenotypes, caption = tabs1a_capt, booktabs = TRUE, format = "latex")
+tabs1a %>% kableExtra::kable_styling(latex_options = "scale_down")
+```
+\clearpage
+```{r tabs1, include = TRUE}
+tabs1_capt <- "Association between polygenic risk for
+schizophrenia and macular subfields"
+tabs1 <- kableExtra::kable(df_ret, caption = tabs1_capt, booktabs = TRUE, format = "latex")
+tabs1 %>% kableExtra::kable_styling(latex_options = "scale_down")
+```
+\clearpage
+
+```{r tabs2, include = TRUE}
+tabs2_capt <- "Association between polygenic risk for
+schizophrenia (PRSSZ) at different p-value thresholds and mean macular thickness"
+df_prs$Phenotype <- gsub("_", " ", df_prs$Phenotype)
+tabs2 <- kableExtra::kable(df_prs, caption = tabs2_capt, booktabs = TRUE, format = "latex")
+tabs2 %>% kableExtra::kable_styling(latex_options = "scale_down")
+```
+\clearpage
+
+```{r tabs3, include = TRUE}
+tabs3_capt <- "Permutation test regression between polygenic risk for schizophrenia
+enriched for multiple gene pathways and inner vs. outer retinal thickness at p-value threshold 1 using PRSet."
+tabs3 <- kableExtra::kable(df_pathcomp_ord, caption = tabs3_capt, row.names = F, booktabs = TRUE, format = "latex")
+tabs3 %>% kableExtra::kable_styling(latex_options = "scale_down")
+```
+\clearpage
+<!--
+```{r tabs6, include = TRUE}
+tabs6_capt <- "Shapiro-Wilk test for normality results for macular data"
+tabs6 <- kableExtra::kable(df_norm, caption = tabs6_capt, booktabs = TRUE, format = "latex")
+tabs6 %>% kableExtra::kable_styling(font_size = 7)
+```
+-->
+\clearpage
+## Supplementary Figures
+```{r appx_fig1_capt}
+appx_figs1_capt <- "a. Association between polygenic risk score for
+schizophrenia and overall macular thickness in each eye respectively.
+Solid lines represent the regression estimates,
+while complementary shaded areas correspond
+to 95 percent confidence intervals.
+Individual macular subfields associated with
+polygenic risk scores for schizophrenia for both left eye
+(b) and right eye (c).
+Color coding corresponds to coefficients from robust
+linear regression model. Higher b values
+correspond to thinner macular subfields with increasing
+polygenic risk scores for schizophrenia.
+The sizes of subfields are slightly inflated for
+visualization purposes only. CS: Center subfield, IS: Inner Superior,
+OS: Outer Superior, IN: Inner Nasal, ON: Outer
+Nasal, II: Inner Inferior, OI: Outer Inferior,
+IT: Inner Temporal, OT: Outer Temporal."
+```
+
+```{r figs1, include = TRUE, fig.cap = appx_figs1_capt}
+ps1a <- readPNG(figs1a)
+ps1ap <- rasterGrob(ps1a, interpolate = TRUE)
+ps1b <- readPNG(fig3a)
+ps1bp <- rasterGrob(ps1b, interpolate = TRUE)
+ps1c <- readPNG(fig3b)
+ps1cnew <- rasterGrob(ps1c, interpolate = TRUE)
+ps1bcp <- cowplot::plot_grid(ps1bp, ps1cnew,
+  nrow = 1, labels = c("b", "c"),
+  label_size = 15
+)
+figs1new <- cowplot::plot_grid(ps1ap, ps1bcp,
+  nrow = 2, labels = c("a"),
+  label_size = 15
+)
+figs1newp <- ggsave(filename = "../output/figures/retinflam_figs1.png", figs1new)
+knitr::include_graphics(figs1newp, rel_path = TRUE)
+```
+\clearpage
+
+```{r appx_fig2_capt}
+appx_fig2_capt <- "Pearson correlation coefficients between
+retinal phenotypes and showing their individual distribution."
+```
+```{r figs2, include = TRUE, fig.cap = appx_fig2_capt, out.width = "90%"}
+knitr::include_graphics(figs2, rel_path = TRUE)
+```
+
+\clearpage
+
+```{r appx_figs6_capt}
+appx_figs6_capt <- "Logarithmic transformation of CRP measurements"
+```
+```{r figs6, include = TRUE, fig.cap = appx_figs6_capt, out.width = "100%"}
+knitr::include_graphics(figs3, rel_path = TRUE)
+```
+
