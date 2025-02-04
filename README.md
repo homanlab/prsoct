@@ -1,8 +1,9 @@
 # Genetic Susceptibility to Schizophrenia Through Neuroinflammatory Pathways is Associated with Retinal Thickness: Findings from the UK Biobank
 
 ## Author
-Finn Rabe <finn dot rabe at bli dot uzh dot ch>
-Philipp Homan<philipp dot homan at bli dot uzh dot ch>
+- Finn Rabe
+Email: [finn.rabe@bli.uzh.ch](mailto:finn.rabe@bli.uzh.ch)
+- Philipp Homan
 
 ## Overview
 This repository contains the code, data, and supplementary materials for the study titled "Genetic Susceptibility to Schizophrenia Through Neuroinflammatory Pathways is Associated with Retinal Thickness: Findings from the UK Biobank". The study investigates the relationship between genetic predisposition to schizophrenia, measured via polygenic risk scores (PRS), and retinal thickness in healthy individuals. The findings suggest that genetic susceptibility to schizophrenia, particularly through neuroinflammatory pathways, is associated with retinal thinning, providing insights into potential early biomarkers for schizophrenia.
