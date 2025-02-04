@@ -34,5 +34,7 @@ Retinal imaging data were acquired using optical coherence tomography (OCT).
 ## Installing
 Clone the repository: **git clone https://github.com/homanlab/prsoct.git**
 
+<!--
 ## Producing all analyses and manuscript
 **Rscript -e "rmarkdown::render('retinflam_ms.Rmd')"**
+-->
