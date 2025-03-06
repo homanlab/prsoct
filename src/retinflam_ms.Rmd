@@ -1,8 +1,8 @@
 ---
 title             : "**Genetic susceptibility to schizophrenia \
-                     through neuroinflammatory pathways is associated \
-                     with retinal thickness:\ Findings from the UK-Biobank**"
-shorttitle        : "Neuroinflammatory pathway and retinal changes" 
+                     through neuroinflammatory pathways associated \
+                     with thinner retinas**"
+shorttitle        : "Neuroinflammatory pathway and retinal atrophy" 
 
 author: 
   - name          : "Finn Rabe, PhD†"
@@ -304,336 +304,6 @@ fig1newp <- ggsave(filename = "../output/figures/retinflam_fig1.png", fig1new)
 knitr::include_graphics(fig1newp, rel_path = TRUE)
 ```
 
-# Methods
-## Base data: schizophrenia genome-wide association study (GWAS) 2022
-The summary statistics base dataset was derived from the latest 
-peer-reviewed genome-wide association study for schizophrenia
-.[@Trubetskoy2022] We used a file generated with the exclusion 
-of samples from the UK Biobank to assure that the
-base and discovery files are independent. Following quality control (QC)
-recommendations [@Choi2020], we assured the same genome build with the
-discovery data (GRCh37/hg19), retained single-nucleotide polymorphisms 
-(SNPs) with minor allele frequency > 1% and INFO score > 0.8, checked 
-for duplicate SNPs and removed ambiguous SNPs. The final
-base file included 5899135 SNPs.
-
-## Discovery data: UK Biobank genetic dataset
-This study used data from the UK Biobank (application
-102266). A full description of genotyping and imputation procedures of
-the UK Biobank data (https://www.ukbiobank.ac.uk/) is provided in the
-release documentation elsewhere. [@Bycroft2018] Briefly, 487409 blood
-samples were assayed using two customized tagSNP arrays (the Applied
-Biosystems UK BiLEVE Axiom Array and the Applied Biosystems UK Biobank
-Axiom Array [Affymetrix, Santa Clara, CA, USA]) with 95% shared
-markers, imputed to the UK10K and 1000 Genome Project Phase 3
-reference panels, with SHAPEIT3 [@OConnell2016] used for phasing, and
-IMPUTE2 [@Howie2009] used for imputation. Further data handling and QC
-steps were carried out according to a published processing pipeline.
-[@Collister2022] To address population stratification, we retrieved
-ten genetic principal components from the UK Biobank. Specifically,
-after SNP extraction and alignment, conversion from bgen to PLINK
-format, removal of ambiguous SNPs (A/T, C/G; effects with allele frequencies
-between 0.4 and 0.6), data underwent a SNP-level QC (MAF < 0.005 and
-INFO score < 0.4) and sample-level QC (retaining individuals with
-missing rate in autosomes =< 0.02, which were not outliers for
-genotype missingness or heterozygosity, not being genetically related
-to third-degree relatives, not being sex-discordant and of White
-British or Irish ethnicity according to genetic grouping). We also
-excluded all optical coherence tomography images with the worst 20% image quality and 
-individuals with eye disorders and diseases known to 
-affect the eye, including diabetes related eye diseases, glaucoma, macular
-degeneration, injury or trauma resulting in loss of vision. 
-We also excluded individuals with highly myopic and hyperopic eyes. Not only 
-did we exclude all individuals that were “highly myopic” according 
-to UK Biobank measurements and criteria [@Guggenheim2015], 
-but we excluded extreme myopic (SE >= -6 diopters) 
-and hyperopic (SE <= 3 diopters) eyes [@EDPRG2004], as measured by a
-median spherical equivalent (SE) value for each eye.
-Finally, individuals with a ICD-10 diagnosis (F20 to F29), those who
-were medicated with antipsychotics, and those who had missing data for the
-variables of interest or covariates were excluded from any further 
-analysis. A Little's Missing Completely at Random (MCAR) test indicated 
-that data were not MCAR (`r format_p(results$mcar_pval,stars = FALSE)`). 
-Therefore, we used multiple imputation using predictive mean matching (PMM) 
-to handle missing values and compared regression results between imputed and complete dataset.
-In total, n = `r n_model_left` individuals with matched imaging-genetic 
-data were included in the final analysis (see Fig. \@ref(fig:fig2) for details
-of participants' inclusion and exclusion).
-
-```{r fig2capt}
-fig1acapt <- "Diagram of inclusion and exclusion of
-participants in population. QC, Quality control;
-ICD, International Classification of Diseases;
-ICD-10, F20-29 categorization includes
-individuals with diagnosed schizophrenia,
-schizotypal and delusional disorders."
-```
-```{r fig2, include = TRUE, fig.cap = fig1acapt, out.width="100%"}
-knitr::include_graphics(diag1, rel_path = TRUE)
-```
-
-## Polygenic risk scores calculations
-In the main analysis, polygenic risk scores for schizophrenia were 
-computed for each individual as a sum of risk alleles
-weighted by their estimated effect sizes [@Choi2019] using the --score
-function in PLINK 2.0.[@Chang2015] In addition, we generated five 
-polygenic risk scores for schizophrenia for each individual, 
-employing SNPs selected based on their significance in association 
-with the phenotype in the discovery GWAS at nominal p-value 
-thresholds of 0.01 or less, 0.05, 0.1, 0.5, and 1.00.
-
-## Derivation of pathway-based polygenic risk scores and signaling-pathway-specific analyses
-We prioritized pathways known to be associated with the disease 
-or phenotype of interest based on previous studies. 
-[@Kirkpatrick2013;@Valle2022;@Silverstein2021;@Luvsannyam2022] 
-Pathway polygenic risk scores were calculated by including only
-those SNPs that were relevant to the specific pathway under investigation 
-and are also associated with schizophrenia. 
-Pathway polygenic risk scores for schizophrenia were computed
-using PRSet [@Choi2020] in PRSice-2 [@Choi2019] for nine candidate
-gene sets selected from the Molecular Signatures Database version
-v2023.2 (https://www.gsea-msigdb.org/): acute inflammatory response
-(systematic name: M6557), TGF-beta signaling (M18933), chronic
-inflammatory response (M15140), positive regulation of dopamine
-receptor signaling pathway (M24111), Wnt signaling pathway involved in
-midbrain dopaminergic neuron differentiation (M25305), 
-Wnt/beta-catenin pathways (M17761),
-neuroinflammatory response (M24927), abnormal retinal vascular
-morphology (M43559) and premature coronary artery atherosclerosis (M36658). 
-For more details, 
-see *Gene pathways from the Molecular Signatures Database (MSigDB) version 7.4 utilized in pathway-based analysis*
-in the Supplementary Information. A PRSet p-value threshold was set 
-at 1 due to the limited number of SNPs in gene-set polygenic risk scores, 
-potentially not reflecting the entirety of gene sets accurately. 
-Both the self-contained p-value and the competitive
-p-value were obtained. Self-contained methods tested each gene 
-set independently to determine if the genes within the set were 
-associated with the phenotype of interest. This approach does 
-not compare the gene set to the rest of the genome. 
-The level of association reflected by self-contained methods 
-is the degree to which the genes within the pathway are 
-collectively associated with the phenotype, without 
-considering genes outside the pathway. [@Choi2020] 
-Competitive methods, on the other hand, compared the level of association between 
-genes within a pathway and the rest of the genes in the genome. 
-This approach tested whether the genes in the pathway are more 
-associated with the phenotype than what would be expected by 
-chance, given the level of association observed in genes outside 
-the pathway. Thus, this competitive method reflected signal enrichment 
-by determining if the pathway stood out against the genomic background. [@Choi2020]
-Both self-contained and competitive p-values were calculated 
-within PRSet through 10,000 permutations to generate null 
-distribution curves for p-values. The regression models 
-consisted of thickness measures for retinal nerve fiber layer-,
-ganglion cell-inner plexiform layer-, inner nuclear layer-, 
-outer retinal thickness  and all covariates. Human GRCh37 genome 
-version was used as the background file.
-
-## Optical coherence tomography protocol and analysis
-Optical coherence tomography images were acquired between the years
-2009 and 2010 using a spectral domain optical coherence tomography device, with a
-raster scan protocol of 6×6mm area centered on the fovea, consisting
-of 128 B-scans each with 512 A-scans, completed in 3.7 seconds. 
-Automated analysis of retinal thickness was performed using custom software
-developed by Topcon Advanced Biomedical Imaging Laboratory, which used 
-dual-scale gradient information for rapid segmentation of nine intraretinal
-boundaries, processing the images in approximately 120 seconds each. A
-comprehensive account of the standardized protocol employed for optical coherence tomography
-acquisition and the subsequent automated analysis of retinal thickness
-has previously been described.[@Keane2016] In the current study, we
-focused on the macula as it contains mutiple layers that, based on
-prior investigations, show thinning in individuals diagnosed with
-schizophrenia. [@Kazakos2019;@Wagner2023;@Komatsu2023]
-
-## Assessments of optical coherence tomography data distribution
-The normality of the distribution for each retinal phenotype was
-assessed by visual inspection. However, the tailedness of the distributions
-for each retinal phenotype data appeared to be skewed
-by outliers (see diagonal in Fig. \@ref(fig:figs2)).
-We also computed the pearson correlation coefficients between 
-retinal phenotypes (Fig. \@ref(fig:figs2)).
-
-## Robust linear regression analysis for overall macular thickness and polygenic risk scores for schizophrenia
-To account for potential outliers and heteroscedasticity observed in
-the retinal phenotype data, robust regression analysis was employed in
-order to examine the association between the polygenic risk scores for
-schizophrenia and macular phenotypes.
-
-Robust linear regression employs M-estimation for robust linear
-modeling. M-estimators are a broad class of estimators in statistics
-that generalize maximum likelihood estimators, which are sensitive to
-outliers and violations of normality assumptions. The estimator used a
-Huber weight-function to downweight the influence of outliers and
-heavy-tailed distributions on the estimation of the model parameters.
-[@Huber1981] We used the MASS::rlm package in R to conduct this 
-robust analysis in which overall macular thickness was the dependent 
-variable and polygenic risk scores for schizophrenia were the independent variable.
-
-In this study when reporting *b*, we always refer 
-to the standardized regression coefficient, 
-which represents the estimated change in the dependent variable 
-for a one-unit change in the independent variable. 
-
-## Confounding factors
-We included a comprehensive set of covariates in a multiple linear
-regression analysis for studying the association between polygenic
-risk scores for schizophrenia and macular thickness in isolation.
-These were age and quadratic age terms, genetic sex, hypertension diagnosed 
-as ICD-10 (I10-15), diabetes mellitus diagnosed as ICD-10 (E10-14),
-alcohol drinker status, Body Mass Index (BMI), smoking status, 
-Townsend Deprivation Index, optical coherence tomography image quality,
-the type of genotyping array used, and the first ten genetic principal components. 
-The following rationale was applied for the inclusion of covariates: 
-Age is a fundamental factor in the development of diseases,
-including macular changes and schizophrenia.[@Wsowska2022] Various 
-retinal structures are also known to degenerate with age.[@Wei2017;@Georgiadis2024] 
-The inclusion of both linear and quadratic terms for age allows the model to
-capture not just a linear increase or decrease in risk or severity
-with age, but also any acceleration or deceleration in this trend.
-Furthermore, biological sex can influence the risk of developing various diseases,
-their progression, and response to treatment [@Zekavat2023], and there is 
-some evidence for sex differences in retinal structural parameters.[@Ryoo2018]
-
-Hypertension can lead to hypertensive retinopathy which results in 
-blurred vision, reduced vision, or even complete loss of sight if 
-left untreated.[@Dziedziak2022] Likewise, diabetic retinopathy is 
-a common microvascular complication of diabetes mellitus that can cause
-vision loss and blindness.[@Wang2018] Furthermore, alcohol consumption
-is associated with open-angle glaucoma.[@Grant2023]
-
-Obesity is a well-known risk factor, as indicated by BMI, for a 
-wide range of health conditions, and is associated in thinner 
-retinal layer thickness.[@Laiginhas2019;@Wsowska2022] Similarly, smoking has
-been linked to an increased risk of various diseases, including those
-affecting the eyes.[@Zekavat2023]
-
-The Townsend Deprivation Index in the UK Biobank reflects socioeconomic
-status, which can influence health outcomes, including those related
-to ophthalmic health.[@Zekavat2023]
-
-The quality of optical coherence tomography images can influence 
-the ability to detect macular changes.
-
-Different genotyping arrays can have varying levels of accuracy or
-might target different sets of genetic variations and thus affect 
-the computation of polygenic risk scores.[@Verlouw2021]
-Likewise, the first ten genetic principal components account for
-population stratification, which can confound genetic associations.
-Including them in our models helps to ensure that any associations
-found are not due to underlying population genetic differences.
-[@Wsowska2022]
-
-## Statistical thresholding
-Statistical significance for individual analyses was defined as p <
-0.05. The pFWER significance threshold using the Holm-Bonferroni method was
-set at pFWER < 0.1.
-
-## Inflammatory biomarkers
-The UK Biobank has meticulously recorded an array of inflammatory 
-biomarkers between the years 2006 and 2010. Comprehensive details 
-about their storage and analysis are available at the Biobank showcase. 
-Peripheral blood cell counts, including lymphocyte, monocyte, neutrophil, 
-and platelet counts, were obtained using an automated Coulter LH 750 analyzer. 
-The instrument's differential blood cell count analysis provided calculated 
-values for neutrophil, lymphocyte, and monocyte counts, with an operating 
-range of 0.00–900.00 × 10^9 cells/L. Platelet counts were obtained directly 
-from instrument measurements, with an operating range of 0.00–5000 × 10^9 cells/L. 
-Using these peripheral blood cell counts, we derived four systemic 
-inflammation markers: Systemic Immune-Inflammation Index (SII), 
-Neutrophil-to-Lymphocyte Ratio (NLR), Platelet-to-Lymphocyte Ratio (PLR),
-and Lymphocyte-to-Monocyte Ratio (LMR). The calculations for these markers were as follows: 
-SII = (neutrophils × platelets) / lymphocytes, 
-NLR = neutrophils / lymphocytes, 
-PLR = platelets / lymphocytes, and LMR = lymphocytes / monocytes.[@Nost2021]
-The measurement of serum C-reactive protein (CRP) levels was carried out using a 
-high-sensitivity immunoturbidimetric method on a Beckman
-Coulter AU5800 analyzer. In our analysis, we applied a logarithmic
-transformation to the CRP levels to address their notably skewed
-distribution, as illustrated in Fig. \@ref(fig:figs6).
-
-## Partial effect analyses
-In order to visualize individual phenotypes, we computed the
-correlation coefficients between the polygenic risk scores for
-schizophrenia and overall macular thickness
-while regressing out all confounding factors. Additionally, we 
-extended this analysis to the combined thickness of 
-outer retinal layers of the macula.
-
-## Mediation analysis
-We further sought to elucidate the mechanisms underlying the
-association between a pathway-enriched polygenic risk score for
-schizophrenia, specifically the neuroinflammatory pathway, and
-inner and outer retinal thickness. Moreover, we investigated the potential
-mediating role of various inflammatory biomarkers in this relationship.
-The rationale for examining these markers as a mediator is grounded in the evidence linking
-neuroinflammatory processes to the pathophysiology of schizophrenia.
-[@Fond2018;@Prins2016] Elevated levels of inflammatory biomarkers have been associated
-with increased risk and severity of schizophrenia, suggesting that
-inflammation may be a biological pathway through which genetic risk
-factors exert their effects on retinal phenotypes. To assess the
-mediation effect, we conducted a robust mediation analysis using two
-models. The mediator model was a robust linear regression that
-predicted inflammatory levels from neuroinflammatory-enriched polygenic risk for schizophrenia while
-controlling for before mentioned covariates. This model allowed us to
-estimate the effect of neuroinflammatory polygenic risk for schizophrenia on inflammatory biomarkers (Path A).  The
-outcome model was another robust linear regression that predicted 
-ganglion cell-inner plexiform layer thickness from both 
-neuroinflammatory-specific polygenic risk for schizophrenia and markers, controlling for the
-same covariates. This model provided estimates for the direct effect
-of neuroinflammatory-specific polygenic risk for schizophrenia on retinal thickness (Path C) 
-and the effect of inflammatory biomarkers on retinal thickness
-while accounting for neuroinflammatory-specific polygenic risk for schizophrenia (Path B). 
-
-The indirect effect (Path C' = Path A * Path B), representing the
-mediation effect of inflammatory biomarkers, was calculated as the product of the
-coefficients from Paths A and B. To evaluate the significance of the
-effect, we employed a bootstrap method with 1000 resamples, generating
-empirical confidence intervals for the mediation effect. This
-non-parametric approach allowed us to infer the robustness of the
-mediation effect without relying on the assumptions of normality. The
-p-value associated with this effect was computed through confidence
-interval inversion.
-
-Since fasting significantly reduces the number of circulating monocytes [@Jordan2019],
-we included fasting time as an additional covariate in this mediation analysis.
-
-## Data availability
-All data utilized in this study is publicly available at the
-UK Biobank (http://www.ukbiobank.ac.uk/).
-
-## Code availability
-All data analyses were performed between June 2023 and
-Feburary 2024 using Python (version 3.9.12) and R (version 4.0.5).
-The manuscript was produced with the R packages rmarkdown
-(version `r packageVersion("rmarkdown")`) [@Allaire2014]; 
-MASS [@Ripley2009]; SjPlot [@Ldecke2013]; 
-represearch (https://github.com/phoman/represearch/); 
-kableExtra [@Zhu2017]; 
-knitr [@Xie2012];
-papaja [@Aust2022];
-matplotlib [@Hunter2007];
-seaborn [@Waskom2021]; and
-scipy.[@Virtanen2020]
-All code will be made freely available after publication 
-to ensure reproducibility at
-https://github.com/homanlab/prsoct/.
-
-## Declaration of generative AI and AI-assisted technologies in the writing process
-During the preparation of this work the authors used [OpenAI / GPT-4] in order 
-to summarize their results. After using this tool, the authors reviewed and edited 
-the content as needed and take full responsibility for the content of the publication.
-
-## Inclusion and Ethics Statement
-This study utilized data from the UK Biobank, a large-scale biomedical database 
-and research resource containing in-depth genetic and health information from 
-half a million UK participants. Ethical approval for the use of UK Biobank data 
-was obtained from the North West Multi-centre Research Ethics Committee (MREC). 
-All participants provided informed consent, and data were anonymized to protect
-participant privacy. The research team adhered to the UK Biobank's policies on 
-data access and usage, ensuring compliance with ethical standards and legal 
-requirements. The study design and analysis were conducted with a commitment to
-inclusivity to ensure broad applicability of the findings.
-
 # Results
 ## Overall reporting details
 Out of the `r results$n_total[1]` individuals recruited with available
@@ -658,12 +328,17 @@ that the precision of the regression estimates varies depending on the
 level of the polygenic risk scores.
 
 ```{r tab1, include = TRUE, out.width="100%"}
-tab1_capt <- "Sample characteristics"
+tab1_capt <- "Sample characteristics highlighting the distribution of key demographic
+and clinical characteristics among the study participants. It includes gender, medical
+conditions (diabetes mellitus and hypertension), smoking status, alcohol consumption
+habits, age, body mass index (BMI), socioeconomic status (Townsend index), and macular
+thickness measurements for both eyes. The sample size (N) is provided for each category,
+with means and standard deviations (SD) given for continuous variables where applicable. "
 tab1 <- kableExtra::kable(df_nsex, caption = tab1_capt, row.names = F, booktabs = TRUE, format = "latex")
 tab1 %>% kableExtra::kable_styling(font_size = 7)
 ```
 
-## Polygenic risk for schizophrenia is associated with overall macular and outer retinal thickness
+## Associations between genetic schizophrenia risk and retina
 The primary dependent variable of the study was the retinal thickness at the macula.
 We conducted robust regression analyses to examine the relationships
 between polygenic risk scores for schizophrenia and mean macular 
@@ -681,7 +356,7 @@ Strikingly, we also found a similar negative association
 for the outer retinal thickness (b = `r mean_outerret_b`, CI = [`r mean_outerret_conflow`, `r mean_outerret_confhigh`], `r format_p(mean_outerret_p,stars = FALSE)`, pFWER = `r round(adjust_macularfwer[2],digits=3)`;
 Fig. \@ref(fig:fig1)c). For robust regression results for the inner and outer retina, see Table \@ref(tab:tabs1a).
 
-## Neuroinflammatory pathway-specific polygenic risk scores are associated with thicknesses of specific layers in the inner retina
+## Neuroinflammatory pathway-specific association
 Pathway-specific polygenic risk scores are crucial for association analysis 
 with retinal thickness because they allowed us to pinpoint specific biological 
 mechanisms underlying the observed retinal changes in schizophrenia patients.
@@ -710,7 +385,7 @@ Signaling pathways influencing neuronal development:
 1. GOBP Wnt signaling pathway involved in midbrain dopaminergic neuron differentiation (M25305)
 2. GOBP positive regulation of dopamine receptor signaling pathway (M24111)
 3. ST Wnt beta catenin pathway (M17761).
-Standard errors in brackets. * p<0.05, ** p<0.01.
+Standard errors in brackets.
 RNFL, Retinal nerve fiber layer;
 GCIPL, Ganglion cell layer to inner plexiform layer;
 INL, Inner nuclear layer;
@@ -778,7 +453,7 @@ kbl(table_data,
 df_gcipl <- read.csv("../output/data/mediation_analysis_GC_IPL_mean.csv")
 colnames(df_gcipl)[1] <- ""
 ```
-## C-reactive protein levels partially mediate the association between neuroinflammatory pathway-specific polygenic risk for schizophrenia and retinal thickness
+## The mediating role of C-reactive protein levels 
 The UK Biobank also provided us with inflammatory marker measurements, 
 which play a pivotal role in managing inflammation. 
 Therefore, we explored the mediating role of these markers in the relationship between 
@@ -986,26 +661,315 @@ environmental factors, and comorbid conditions that can affect retinal
 health, to determine the true potential of retinal changes as a 
 biomarker for schizophrenia-related processes.
 
+# Methods
+## Base data: schizophrenia GWAS 2022
+The summary statistics base dataset was derived from the latest 
+peer-reviewed genome-wide association study for schizophrenia
+.[@Trubetskoy2022] We used a file generated with the exclusion 
+of samples from the UK Biobank to assure that the
+base and discovery files are independent. Following quality control (QC)
+recommendations [@Choi2020], we assured the same genome build with the
+discovery data (GRCh37/hg19), retained single-nucleotide polymorphisms 
+(SNPs) with minor allele frequency > 1% and INFO score > 0.8, checked 
+for duplicate SNPs and removed ambiguous SNPs. The final
+base file included 5899135 SNPs.
+
+## Discovery data: UK Biobank genetic dataset
+This study used data from the UK Biobank (application
+102266). A full description of genotyping and imputation procedures of
+the UK Biobank data (https://www.ukbiobank.ac.uk/) is provided in the
+release documentation elsewhere. [@Bycroft2018] Briefly, 487409 blood
+samples were assayed using two customized tagSNP arrays (the Applied
+Biosystems UK BiLEVE Axiom Array and the Applied Biosystems UK Biobank
+Axiom Array [Affymetrix, Santa Clara, CA, USA]) with 95% shared
+markers, imputed to the UK10K and 1000 Genome Project Phase 3
+reference panels, with SHAPEIT3 [@OConnell2016] used for phasing, and
+IMPUTE2 [@Howie2009] used for imputation. Further data handling and QC
+steps were carried out according to a published processing pipeline.
+[@Collister2022] To address population stratification, we retrieved
+ten genetic principal components from the UK Biobank. Specifically,
+after SNP extraction and alignment, conversion from bgen to PLINK
+format, removal of ambiguous SNPs (A/T, C/G; effects with allele frequencies
+between 0.4 and 0.6), data underwent a SNP-level QC (MAF < 0.005 and
+INFO score < 0.4) and sample-level QC (retaining individuals with
+missing rate in autosomes =< 0.02, which were not outliers for
+genotype missingness or heterozygosity, not being genetically related
+to third-degree relatives, not being sex-discordant and of White
+British or Irish ethnicity according to genetic grouping). We also
+excluded all optical coherence tomography images with the worst 20% image quality and 
+individuals with eye disorders and diseases known to 
+affect the eye, including diabetes related eye diseases, glaucoma, macular
+degeneration, injury or trauma resulting in loss of vision. 
+We also excluded individuals with highly myopic and hyperopic eyes. Not only 
+did we exclude all individuals that were “highly myopic” according 
+to UK Biobank measurements and criteria [@Guggenheim2015], 
+but we excluded extreme myopic (SE >= -6 diopters) 
+and hyperopic (SE <= 3 diopters) eyes [@EDPRG2004], as measured by a
+median spherical equivalent (SE) value for each eye.
+Finally, individuals with a ICD-10 diagnosis (F20 to F29), those who
+were medicated with antipsychotics, and those who had missing data for the
+variables of interest or covariates were excluded from any further 
+analysis. A Little's Missing Completely at Random (MCAR) test indicated 
+that data were not MCAR (`r format_p(results$mcar_pval,stars = FALSE)`). 
+Therefore, we used multiple imputation using predictive mean matching (PMM) 
+to handle missing values and compared regression results between imputed and complete dataset.
+In total, n = `r n_model_left` individuals with matched imaging-genetic 
+data were included in the final analysis (see Fig. \@ref(fig:fig2) for details
+of participants' inclusion and exclusion).
+
+```{r fig2capt}
+fig1acapt <- "Diagram of inclusion and exclusion of
+participants in population. QC, Quality control;
+ICD, International Classification of Diseases;
+ICD-10, F20-29 categorization includes
+individuals with diagnosed schizophrenia,
+schizotypal and delusional disorders."
+```
+```{r fig2, include = TRUE, fig.cap = fig1acapt, out.width="100%"}
+knitr::include_graphics(diag1, rel_path = TRUE)
+```
+
+## Polygenic risk scores calculations
+In the main analysis, polygenic risk scores for schizophrenia were 
+computed for each individual as a sum of risk alleles
+weighted by their estimated effect sizes [@Choi2019] using the --score
+function in PLINK 2.0.[@Chang2015] In addition, we generated five 
+polygenic risk scores for schizophrenia for each individual, 
+employing SNPs selected based on their significance in association 
+with the phenotype in the discovery GWAS at nominal p-value 
+thresholds of 0.01 or less, 0.05, 0.1, 0.5, and 1.00.
+
+## Pathway-based polygenic risk scores and analysis
+We prioritized pathways known to be associated with the disease 
+or phenotype of interest based on previous studies. 
+[@Kirkpatrick2013;@Valle2022;@Silverstein2021;@Luvsannyam2022] 
+Pathway polygenic risk scores were calculated by including only
+those SNPs that were relevant to the specific pathway under investigation 
+and are also associated with schizophrenia. 
+Pathway polygenic risk scores for schizophrenia were computed
+using PRSet [@Choi2020] in PRSice-2 [@Choi2019] for nine candidate
+gene sets selected from the Molecular Signatures Database version
+v2023.2 (https://www.gsea-msigdb.org/): acute inflammatory response
+(systematic name: M6557), TGF-beta signaling (M18933), chronic
+inflammatory response (M15140), positive regulation of dopamine
+receptor signaling pathway (M24111), Wnt signaling pathway involved in
+midbrain dopaminergic neuron differentiation (M25305), 
+Wnt/beta-catenin pathways (M17761),
+neuroinflammatory response (M24927), abnormal retinal vascular
+morphology (M43559) and premature coronary artery atherosclerosis (M36658). 
+For more details, 
+see *Gene pathways from the Molecular Signatures Database (MSigDB) version 7.4 utilized in pathway-based analysis*
+in the Supplementary Information.
+
+## Optical coherence tomography protocol and analysis
+Optical coherence tomography images were acquired between the years
+2009 and 2010 using a spectral domain optical coherence tomography device, with a
+raster scan protocol of 6×6mm area centered on the fovea, consisting
+of 128 B-scans each with 512 A-scans, completed in 3.7 seconds. 
+Automated analysis of retinal thickness was performed using custom software
+developed by Topcon Advanced Biomedical Imaging Laboratory, which used 
+dual-scale gradient information for rapid segmentation of nine intraretinal
+boundaries, processing the images in approximately 120 seconds each. A
+comprehensive account of the standardized protocol employed for optical coherence tomography
+acquisition and the subsequent automated analysis of retinal thickness
+has previously been described.[@Keane2016] In the current study, we
+focused on the macula as it contains mutiple layers that, based on
+prior investigations, show thinning in individuals diagnosed with
+schizophrenia. [@Kazakos2019;@Wagner2023;@Komatsu2023]
+
+## Assessments of optical coherence tomography data
+The normality of the distribution for each retinal phenotype was
+assessed by visual inspection. However, the tailedness of the distributions
+for each retinal phenotype data appeared to be skewed
+by outliers (see diagonal in Fig. \@ref(fig:figs2)).
+We also computed the pearson correlation coefficients between 
+retinal phenotypes (Fig. \@ref(fig:figs2)).
+
+## Robust linear regression analysis
+To account for potential outliers and heteroscedasticity observed in
+the retinal phenotype data, robust regression analysis was employed in
+order to examine the association between the polygenic risk scores for
+schizophrenia and macular phenotypes.
+
+Robust linear regression employs M-estimation for robust linear
+modeling. M-estimators are a broad class of estimators in statistics
+that generalize maximum likelihood estimators, which are sensitive to
+outliers and violations of normality assumptions. The estimator used a
+Huber weight-function to downweight the influence of outliers and
+heavy-tailed distributions on the estimation of the model parameters.
+[@Huber1981] We used the MASS::rlm package in R to conduct this 
+robust analysis in which overall macular thickness was the dependent 
+variable and polygenic risk scores for schizophrenia were the independent variable.
+
+In this study when reporting *b*, we always refer 
+to the standardized regression coefficient, 
+which represents the estimated change in the dependent variable 
+for a one-unit change in the independent variable. 
+
+## Confounding factors
+We included a comprehensive set of covariates in a multiple linear
+regression analysis for studying the association between polygenic
+risk scores for schizophrenia and macular thickness in isolation.
+These were age and quadratic age terms, genetic sex, hypertension diagnosed 
+as ICD-10 (I10-15), diabetes mellitus diagnosed as ICD-10 (E10-14),
+alcohol drinker status, Body Mass Index (BMI), smoking status, 
+Townsend Deprivation Index, optical coherence tomography image quality,
+the type of genotyping array used, and the first ten genetic principal components. 
+The following rationale was applied for the inclusion of covariates: 
+Age is a fundamental factor in the development of diseases,
+including macular changes and schizophrenia.[@Wsowska2022] Various 
+retinal structures are also known to degenerate with age.[@Wei2017;@Georgiadis2024] 
+The inclusion of both linear and quadratic terms for age allows the model to
+capture not just a linear increase or decrease in risk or severity
+with age, but also any acceleration or deceleration in this trend.
+Furthermore, biological sex can influence the risk of developing various diseases,
+their progression, and response to treatment [@Zekavat2023], and there is 
+some evidence for sex differences in retinal structural parameters.[@Ryoo2018]
+
+Hypertension can lead to hypertensive retinopathy which results in 
+blurred vision, reduced vision, or even complete loss of sight if 
+left untreated.[@Dziedziak2022] Likewise, diabetic retinopathy is 
+a common microvascular complication of diabetes mellitus that can cause
+vision loss and blindness.[@Wang2018] Furthermore, alcohol consumption
+is associated with open-angle glaucoma.[@Grant2023]
+
+Obesity is a well-known risk factor, as indicated by BMI, for a 
+wide range of health conditions, and is associated in thinner 
+retinal layer thickness.[@Laiginhas2019;@Wsowska2022] Similarly, smoking has
+been linked to an increased risk of various diseases, including those
+affecting the eyes.[@Zekavat2023]
+
+The Townsend Deprivation Index in the UK Biobank reflects socioeconomic
+status, which can influence health outcomes, including those related
+to ophthalmic health.[@Zekavat2023]
+
+The quality of optical coherence tomography images can influence 
+the ability to detect macular changes.
+
+Different genotyping arrays can have varying levels of accuracy or
+might target different sets of genetic variations and thus affect 
+the computation of polygenic risk scores.[@Verlouw2021]
+Likewise, the first ten genetic principal components account for
+population stratification, which can confound genetic associations.
+Including them in our models helps to ensure that any associations
+found are not due to underlying population genetic differences.
+[@Wsowska2022]
+
+## Statistical thresholding
+Statistical significance for individual analyses was defined as p <
+0.05. The pFWER significance threshold using the Holm-Bonferroni method was
+set at pFWER < 0.1.
+
+## Inflammatory biomarkers
+The UK Biobank has meticulously recorded an array of inflammatory 
+biomarkers between the years 2006 and 2010. Comprehensive details 
+about their storage and analysis are available at the Biobank showcase. 
+Peripheral blood cell counts, including lymphocyte, monocyte, neutrophil, 
+and platelet counts, were obtained using an automated Coulter LH 750 analyzer. 
+The instrument's differential blood cell count analysis provided calculated 
+values for neutrophil, lymphocyte, and monocyte counts, with an operating 
+range of 0.00–900.00 × 10^9 cells/L. Platelet counts were obtained directly 
+from instrument measurements, with an operating range of 0.00–5000 × 10^9 cells/L. 
+Using these peripheral blood cell counts, we derived four systemic 
+inflammation markers: Systemic Immune-Inflammation Index (SII), 
+Neutrophil-to-Lymphocyte Ratio (NLR), Platelet-to-Lymphocyte Ratio (PLR),
+and Lymphocyte-to-Monocyte Ratio (LMR). The calculations for these markers were as follows: 
+SII = (neutrophils × platelets) / lymphocytes, 
+NLR = neutrophils / lymphocytes, 
+PLR = platelets / lymphocytes, and LMR = lymphocytes / monocytes.[@Nost2021]
+The measurement of serum C-reactive protein (CRP) levels was carried out using a 
+high-sensitivity immunoturbidimetric method on a Beckman
+Coulter AU5800 analyzer. In our analysis, we applied a logarithmic
+transformation to the CRP levels to address their notably skewed
+distribution, as illustrated in Fig. \@ref(fig:figs6).
+
+## Partial effect analyses
+In order to visualize individual phenotypes, we computed the
+correlation coefficients between the polygenic risk scores for
+schizophrenia and overall macular thickness
+while regressing out all confounding factors. Additionally, we 
+extended this analysis to the combined thickness of 
+outer retinal layers of the macula.
+
+## Mediation analysis
+We further sought to elucidate the mechanisms underlying the
+association between a pathway-enriched polygenic risk score for
+schizophrenia, specifically the neuroinflammatory pathway, and
+inner and outer retinal thickness. Moreover, we investigated the potential
+mediating role of various inflammatory biomarkers in this relationship.
+The rationale for examining these markers as a mediator is grounded in the evidence linking
+neuroinflammatory processes to the pathophysiology of schizophrenia.
+[@Fond2018;@Prins2016] Elevated levels of inflammatory biomarkers have been associated
+with increased risk and severity of schizophrenia, suggesting that
+inflammation may be a biological pathway through which genetic risk
+factors exert their effects on retinal phenotypes. To assess the
+mediation effect, we conducted a robust mediation analysis using two
+models. The mediator model was a robust linear regression that
+predicted inflammatory levels from neuroinflammatory-enriched polygenic risk for schizophrenia while
+controlling for before mentioned covariates. This model allowed us to
+estimate the effect of neuroinflammatory polygenic risk for schizophrenia on inflammatory biomarkers (Path A).  The
+outcome model was another robust linear regression that predicted 
+ganglion cell-inner plexiform layer thickness from both 
+neuroinflammatory-specific polygenic risk for schizophrenia and markers, controlling for the
+same covariates. This model provided estimates for the direct effect
+of neuroinflammatory-specific polygenic risk for schizophrenia on retinal thickness (Path C) 
+and the effect of inflammatory biomarkers on retinal thickness
+while accounting for neuroinflammatory-specific polygenic risk for schizophrenia (Path B). 
+
+The indirect effect (Path C' = Path A * Path B), representing the
+mediation effect of inflammatory biomarkers, was calculated as the product of the
+coefficients from Paths A and B. To evaluate the significance of the
+effect, we employed a bootstrap method with 1000 resamples, generating
+empirical confidence intervals for the mediation effect. This
+non-parametric approach allowed us to infer the robustness of the
+mediation effect without relying on the assumptions of normality. The
+p-value associated with this effect was computed through confidence
+interval inversion.
+
+Since fasting significantly reduces the number of circulating monocytes [@Jordan2019],
+we included fasting time as an additional covariate in this mediation analysis.
+
+## Data availability
+The summary statistics for the schizophrenia GWAS are publicly available 
+at https://pgc.unc.edu/for-researchers/download-results, while the discovery 
+data used in the study is based on the GRCh37/hg19 human genome assembly, 
+which can be accessed through the NCBI Datasets resource at https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.13/.  
+The rest of the data utilized in this study is publicly available 
+at the UK Biobank (http://www.ukbiobank.ac.uk/) and was accessed via 
+application number 102266. 
+
+## Code availability
+All data analyses were performed between June 2023 and
+Feburary 2024 using Python (version 3.9.12) and R (version 4.0.5).
+The polygenic risk scores were computed using PRSet (version 2.3.5) [@Choi2020].
+The manuscript was produced with the R packages rmarkdown
+(version `r packageVersion("rmarkdown")`) [@Allaire2014]; 
+MASS (version `r packageVersion("MASS")`) [@Ripley2009]; 
+SjPlot (version `r packageVersion("SjPlot")`) [@Ldecke2013]; 
+represearch (https://github.com/phoman/represearch/); 
+kableExtra (version `r packageVersion("kableExtra")`) [@Zhu2017]; 
+knitr (version `r packageVersion("knitr")`) [@Xie2012];
+papaja (version `r packageVersion("papaja")`) [@Aust2022];
+matplotlib (version 3.7.3) [@Hunter2007];
+seaborn (version 0.11.2) [@Waskom2021]; and
+scipy (version 1.9.1).[@Virtanen2020]
+All code will be made freely available after publication 
+to ensure reproducibility at
+https://github.com/homanlab/prsoct/.
+
+## Inclusion and Ethics Statement
+This study utilized data from the UK Biobank, a large-scale biomedical database 
+and research resource containing in-depth genetic and health information from 
+half a million UK participants. Ethical approval for the use of UK Biobank data 
+was obtained from the North West Multi-centre Research Ethics Committee (MREC). 
+All participants provided informed consent, and data were anonymized to protect
+participant privacy. The research team adhered to the UK Biobank's policies on 
+data access and usage, ensuring compliance with ethical standards and legal 
+requirements. The study design and analysis were conducted with a commitment to
+inclusivity to ensure broad applicability of the findings.
+
 # Acknowledgements
 Figures 1a and 1c include graphics created with BioRender.com.
-
-# Role of the funding source
-PH is supported by a NARSAD grant from the Brain & Behavior Research
-Foundation (28445) and by a Research Grant from the Novartis
-Foundation (20A058). The study design, data collection, data analysis,
-data interpretation, and report writing was conducted independently,
-without involvement from the funders.
-
-T.L. was supported by the National Institute of Mental Health of the
-National Institutes of Health (NIH) under award no. R01MH117646 (T.L.,
-principal investigator). The content is solely the responsibility of
-the authors and does not necessarily represent the official views of
-the NIH.
-
-# Competing interests
-PH has received grants and honoraria from Novartis, Lundbeck, Mepha,
-Janssen, Boehringer Ingelheim, Neurolite outside of this work. No other
-disclosures were reported.
 
 # Author contributions
 FR: conceptualization, methodology, statistical analysis, visualization, writing, review and editing.
@@ -1025,6 +989,24 @@ JR: review & editing.
 TL: supervision, methodology, review & editing.
 PH: supervision, conceptualization, writing, review and editing.
 
+# Role of the funding source
+PH is supported by a NARSAD grant from the Brain & Behavior Research
+Foundation (28445) and by a Research Grant from the Novartis
+Foundation (20A058). The study design, data collection, data analysis,
+data interpretation, and report writing was conducted independently,
+without involvement from the funders.
+
+T.L. was supported by the National Institute of Mental Health of the
+National Institutes of Health (NIH) under award no. R01MH117646 (T.L.,
+principal investigator). The content is solely the responsibility of
+the authors and does not necessarily represent the official views of
+the NIH.
+
+# Competing interests
+PH has received grants and honoraria from Novartis, Lundbeck, Mepha,
+Janssen, Boehringer Ingelheim, Neurolite outside of this work. No other
+disclosures were reported.
+
 # References
 <div id = "refs"></div> 
 
@@ -1033,8 +1015,36 @@ PH: supervision, conceptualization, writing, review and editing.
 \beginsupplement
 
 # Supplementary Information
-## Supplementary Results
+## Signaling-pathway-specific analyses
+A PRSet p-value threshold was set 
+at 1 due to the limited number of SNPs in gene-set polygenic risk scores, 
+potentially not reflecting the entirety of gene sets accurately. 
+Both the self-contained p-value and the competitive
+p-value were obtained. Self-contained methods tested each gene 
+set independently to determine if the genes within the set were 
+associated with the phenotype of interest. This approach does 
+not compare the gene set to the rest of the genome. 
+The level of association reflected by self-contained methods 
+is the degree to which the genes within the pathway are 
+collectively associated with the phenotype, without 
+considering genes outside the pathway. [@Choi2020] 
+Competitive methods, on the other hand, compared the level of association between 
+genes within a pathway and the rest of the genes in the genome. 
+This approach tested whether the genes in the pathway are more 
+associated with the phenotype than what would be expected by 
+chance, given the level of association observed in genes outside 
+the pathway. Thus, this competitive method reflected signal enrichment 
+by determining if the pathway stood out against the genomic background. [@Choi2020]
+Both self-contained and competitive p-values were calculated 
+within PRSet through 10,000 permutations to generate null 
+distribution curves for p-values. The regression models 
+consisted of thickness measures for retinal nerve fiber layer-,
+ganglion cell-inner plexiform layer-, inner nuclear layer-, 
+outer retinal thickness  and all covariates. Human GRCh37 genome 
+version was used as the background file.\
+
 ### Gene pathways from the Molecular Signatures Database (MSigDB) version 7.4 utilized in pathway-based analysis
+\
 **GOBP_NEUROINFLAMMATORY_RESPONSE** > Neuroinflammatory response is the 
 nervous system's reaction to various forms of damage, including 
 infection, traumatic brain injury, toxic metabolites, or autoimmunity. 
