@@ -346,7 +346,7 @@ for (y in y_name) {
         model_total <- rlm(as.formula(paste(y, "~", prsvar, "+", cov)), data = df_filt, psi = psi.huber)
         model_direct <- rlm(as.formula(paste(y, "~", prsvar, "+", inflam_marker, "+", cov)), data = df_filt, psi = psi.huber)
         model_mediator <- rlm(as.formula(paste(inflam_marker, "~", prsvar, "+", cov)), data = df_filt, psi = psi.huber)
-        model_outcome <- rlm(as.formula(paste(y, "~", inflam_marker, "+", prsvar, "+", cov)), data = df_filt, psi = psi.huber)
+        model_outcome <- rlm(as.formula(paste(y, "~", inflam_marker, "+", cov)), data = df_filt, psi = psi.huber)
 
         a_coefficient <- coef(model_mediator)[prsvar]
         b_coefficient <- coef(model_outcome)[inflam_marker]
